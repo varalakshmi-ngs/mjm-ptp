@@ -61,7 +61,7 @@ router.post(
       await pool.query(
         `INSERT INTO candidates (
           full_name, father_name, date_of_birth, gender, mobile, email, aadhaar, qualification, specialization, year_of_passing, percentage, applying_for, experience, skills, preferred_location, resume, photo
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)`,
         [
           fullName,
           fatherName,
