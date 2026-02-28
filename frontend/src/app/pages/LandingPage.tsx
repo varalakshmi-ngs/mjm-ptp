@@ -264,8 +264,8 @@ export default function LandingPage() {
                 <li><a href="#about" className="hover:text-blue-400 transition-colors">About Us</a></li>
                 <li><a href="#event-details" className="hover:text-blue-400 transition-colors">Event Details</a></li>
                 <li>
-                  <button onClick={() => navigate('/register')} className="hover:text-blue-400 transition-colors">
-                    Register Now
+                  <button onClick={() => navigate('/admin')} className="hover:text-blue-400 transition-colors">
+                    logs
                   </button>
                 </li>
               </ul>
