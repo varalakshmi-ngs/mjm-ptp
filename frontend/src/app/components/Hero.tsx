@@ -63,7 +63,7 @@ export function Hero({ onRegisterClick }: HeroProps) {
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg mb-1">Event Date</h3>
-                  <p className="text-blue-100">March 15, 2026 | 9:00 AM - 5:00 PM</p>
+                  <p className="text-blue-100">March 07, 2026 | 9:00 AM - 5:00 PM</p>
                 </div>
               </div>
             </div>
@@ -75,7 +75,7 @@ export function Hero({ onRegisterClick }: HeroProps) {
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg mb-1">Venue</h3>
-                  <p className="text-blue-100">SDVVL Convention Center, Sector 12, Tech Park</p>
+                  <p className="text-blue-100"><b>Suryaraya Degree college,</b> Pithapuram,Kakinada District, AP, 533450</p>
                 </div>
               </div>
             </div>
@@ -87,10 +87,10 @@ export function Hero({ onRegisterClick }: HeroProps) {
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg mb-1">Contact Us</h3>
-                  <p className="text-blue-100">+91 9876543210</p>
+                  <p className="text-blue-100">+91 81216 52938 | +91 88869 68522</p>
                   <p className="text-blue-100 flex items-center gap-2 mt-1">
                     <Mail className="h-4 w-4" />
-                    careers@sdvvl.com
+                    careers@sdvvl.com 
                   </p>
                 </div>
               </div>

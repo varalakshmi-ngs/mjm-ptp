@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router';
 import { Hero } from '../components/Hero';
 import { Building2, Users, Briefcase, TrendingUp, MapPin, Phone, Mail } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import logo from "../../../public/b5dc0401-0a74-4242-aad1-2fc3e46169b5-removebg-preview.png"
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -17,8 +18,8 @@ export default function LandingPage() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="bg-blue-600 p-2 rounded-lg">
-                <Building2 className="h-8 w-8 text-white" />
+              <div className="p-2 rounded-lg">
+                <img src={logo} alt="sdvvl" className='h-20 w-20' />
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">SDVVL</h1>
@@ -51,14 +52,14 @@ export default function LandingPage() {
               <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
                 <Users className="h-8 w-8 text-blue-600" />
               </div>
-              <h3 className="text-3xl font-bold text-gray-900">500+</h3>
+              <h3 className="text-3xl font-bold text-gray-900">30+</h3>
               <p className="text-gray-600">Companies</p>
             </div>
             <div className="text-center">
               <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
                 <Briefcase className="h-8 w-8 text-green-600" />
               </div>
-              <h3 className="text-3xl font-bold text-gray-900">2000+</h3>
+              <h3 className="text-3xl font-bold text-gray-900">1000+</h3>
               <p className="text-gray-600">Job Openings</p>
             </div>
             <div className="text-center">
@@ -157,8 +158,8 @@ export default function LandingPage() {
                       </div>
                       <div>
                         <h4 className="font-semibold text-gray-900">Venue</h4>
-                        <p className="text-gray-700">SDVVL Convention Center</p>
-                        <p className="text-gray-600">Sector 12, Tech Park, 400001</p>
+                        <p className="text-gray-700">Suryaraya Degree college</p>
+                        <p className="text-gray-600">Pithapuram,Kakinada District, AP, 533450</p>
                       </div>
                     </div>
 
@@ -168,8 +169,8 @@ export default function LandingPage() {
                       </div>
                       <div>
                         <h4 className="font-semibold text-gray-900">Contact</h4>
-                        <p className="text-gray-700">+91 9876543210</p>
-                        <p className="text-gray-700">+91 9876543211</p>
+                        <p className="text-gray-700">+91 81216 52938 </p>
+                        <p className="text-gray-700">+91 88869 68522</p>
                       </div>
                     </div>
 
@@ -180,7 +181,7 @@ export default function LandingPage() {
                       <div>
                         <h4 className="font-semibold text-gray-900">Email</h4>
                         <p className="text-gray-700">careers@sdvvl.com</p>
-                        <p className="text-gray-700">support@sdvvl.com</p>
+                        <p className="text-gray-700">sdvvlcompany@gmail.com</p>
                       </div>
                     </div>
                   </div>
@@ -213,7 +214,7 @@ export default function LandingPage() {
 
                   <div className="mt-8 bg-white rounded-lg p-4 border-2 border-blue-300">
                     <p className="text-sm font-semibold text-blue-900 mb-2">⏰ Event Timing</p>
-                    <p className="text-2xl font-bold text-blue-600">March 15, 2026</p>
+                    <p className="text-2xl font-bold text-blue-600">March 07, 2026</p>
                     <p className="text-gray-700">9:00 AM - 5:00 PM</p>
                   </div>
                 </div>
@@ -247,8 +248,8 @@ export default function LandingPage() {
           <div className="grid md:grid-cols-3 gap-8">
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <div className="bg-blue-600 p-2 rounded-lg">
-                  <Building2 className="h-6 w-6 text-white" />
+                <div className="bg-white p-2 rounded-lg">
+                  <img src={logo} alt="sdvvl" className='h-20 w-20' />
                 </div>
                 <h3 className="text-xl font-bold text-white">SDVVL</h3>
               </div>
@@ -265,7 +266,7 @@ export default function LandingPage() {
                 <li><a href="#event-details" className="hover:text-blue-400 transition-colors">Event Details</a></li>
                 <li>
                   <button onClick={() => navigate('/admin')} className="hover:text-blue-400 transition-colors">
-                    logs
+                    login
                   </button>
                 </li>
               </ul>
@@ -276,7 +277,7 @@ export default function LandingPage() {
               <ul className="space-y-2">
                 <li className="flex items-center gap-2">
                   <Phone className="h-4 w-4" />
-                  +91 9876543210
+                  +91 81216 52938
                 </li>
                 <li className="flex items-center gap-2">
                   <Mail className="h-4 w-4" />
@@ -284,7 +285,7 @@ export default function LandingPage() {
                 </li>
                 <li className="flex items-center gap-2">
                   <MapPin className="h-4 w-4" />
-                  Sector 12, Tech Park
+                  Sarpavaram Junction,Kakinada,533005
                 </li>
               </ul>
             </div>

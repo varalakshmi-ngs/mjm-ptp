@@ -105,11 +105,7 @@ export default function AdminLoginPage() {
               {isLoading ? 'Logging in...' : 'Login to Admin Panel'}
             </Button>
 
-            <div className="bg-blue-50 rounded-lg p-4 mt-4">
-              <p className="text-sm text-blue-900 font-medium mb-2">Demo Credentials:</p>
-              <p className="text-sm text-gray-700">Username: <code className="bg-white px-2 py-1 rounded">admin</code></p>
-              <p className="text-sm text-gray-700">Password: <code className="bg-white px-2 py-1 rounded">admin123</code></p>
-            </div>
+           
           </form>
         </CardContent>
       </Card>
