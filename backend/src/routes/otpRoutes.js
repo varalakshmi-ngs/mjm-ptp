@@ -3,7 +3,8 @@ import fetch from 'node-fetch';
 
 const router = express.Router();
 
-const apiKey = process.env.TWO_FACTOR_API_KEY;
+// const apiKey = process.env.TWO_FACTOR_API_KEY;
+const apiKey ="227269a4-23f9-11ef-8b60-0200cd936042";
 
 // Send OTP
 router.post('/send-otp', async (req, res) => {
@@ -11,7 +12,7 @@ router.post('/send-otp', async (req, res) => {
   if (!mobile) return res.status(400).json({ success: false, message: 'Mobile number required' });
 
   try {
-    const response = await fetch(`https://2factor.in/API/V1/${apiKey}/SMS/+91${mobile}/AUTOGEN`);
+    const response = await fetch(`https://2factor.in/API/V1/${apiKey}/SMS/91${mobile}/AUTOGEN`);
     const data = await response.json();
 
     if (data.Status === 'Success') {
