@@ -20,11 +20,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../components/
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { toast } from 'sonner';
 import {
-  getAllCandidates,
-  searchCandidates,
-  getCandidateById,
-  exportToCSV,
-  getStatistics,
   type Candidate
 } from '../utils/storage';
 
@@ -43,6 +38,34 @@ export default function AdminDashboard() {
     byExperience: { Fresher: 0, Experienced: 0 }
   });
 
+  const exportToCSV = () => {
+  const headers = [
+    "ID",
+    "Full Name",
+    "Email",
+    "Mobile",
+    "Qualification",
+    "Applying For",
+    "Experience",
+    "Registered On"
+  ];
+
+  const rows = filteredCandidates.map((c: Candidate) => [
+    c.id,
+    c.fullName,
+    c.email,
+    c.mobile,
+    c.qualification,
+    c.applyingFor,
+    c.experience,
+    new Date(c.createdAt).toLocaleDateString()
+  ]);
+
+  return [headers, ...rows]
+    .map(row => row.join(","))
+    .join("\n");
+};
+
   useEffect(() => {
     // Check if admin is logged in
     const isLoggedIn = sessionStorage.getItem('admin_logged_in');
@@ -50,45 +73,86 @@ export default function AdminDashboard() {
       navigate('/admin');
       return;
     }
-
-    loadCandidates();
-    loadStatistics();
+    fetchCandidates();
   }, [navigate]);
 
   useEffect(() => {
     applyFilters();
   }, [searchQuery, filterJobType, filterExperience, candidates]);
 
-  const loadCandidates = () => {
-    const allCandidates = getAllCandidates();
-    setCandidates(allCandidates);
-    setFilteredCandidates(allCandidates);
+  const fetchCandidates = async () => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/registration/candidates`);
+      const data = await response.json();
+      setCandidates(data);
+      setFilteredCandidates(data);
+      setStats(computeStats(data));
+    } catch (error) {
+      toast.error('Failed to fetch candidates');
+    }
   };
 
-  const loadStatistics = () => {
-    const statistics = getStatistics();
-    setStats(statistics);
-  };
-
+  // const applyFilters = () => {
+  //   let filtered = candidates;
+  //   if (searchQuery) {
+  //     const lowerQuery = searchQuery.toLowerCase();
+  //     filtered = filtered.filter(c =>
+  //       c.full_name.toLowerCase().includes(lowerQuery) ||
+  //       c.email.toLowerCase().includes(lowerQuery) ||
+  //       c.mobile.includes(searchQuery) ||
+  //       c.qualification.toLowerCase().includes(lowerQuery)
+  //     );
+  //   }
+  //   if (filterJobType !== 'all') {
+  //     filtered = filtered.filter(c => c.applying_for === filterJobType);
+  //   }
+  //   if (filterExperience !== 'all') {
+  //     filtered = filtered.filter(c => c.experience === filterExperience);
+  //   }
+  //   setFilteredCandidates(filtered);
+  // };
   const applyFilters = () => {
     let filtered = candidates;
 
-    // Apply search filter
     if (searchQuery) {
-      filtered = searchCandidates(searchQuery);
+      const lowerQuery = searchQuery.toLowerCase();
+
+      filtered = filtered.filter((c: Candidate) =>
+        c.fullName.toLowerCase().includes(lowerQuery) ||
+        c.email.toLowerCase().includes(lowerQuery) ||
+        c.mobile.includes(searchQuery) ||
+        c.qualification.toLowerCase().includes(lowerQuery)
+      );
     }
 
-    // Apply job type filter
     if (filterJobType !== 'all') {
-      filtered = filtered.filter(c => c.applyingFor === filterJobType);
+      filtered = filtered.filter(
+        (c: Candidate) => c.applyingFor === filterJobType
+      );
     }
 
-    // Apply experience filter
     if (filterExperience !== 'all') {
-      filtered = filtered.filter(c => c.experience === filterExperience);
+      filtered = filtered.filter(
+        (c: Candidate) => c.experience === filterExperience
+      );
     }
 
     setFilteredCandidates(filtered);
+  };
+  const computeStats = (candidates: Candidate[]) => {
+    return {
+      total: candidates.length,
+      byJobType: {
+        IT: candidates.filter((c: Candidate) => c.applyingFor === 'IT').length,
+        NonIT: candidates.filter((c: Candidate) => c.applyingFor === 'Non-IT').length,
+        Technical: candidates.filter((c: Candidate) => c.applyingFor === 'Technical').length,
+        Support: candidates.filter((c: Candidate) => c.applyingFor === 'Support').length,
+      },
+      byExperience: {
+        Fresher: candidates.filter((c: Candidate) => c.experience === 'Fresher').length,
+        Experienced: candidates.filter((c: Candidate) => c.experience === 'Experienced').length,
+      }
+    };
   };
 
   const handleViewDetails = (candidate: Candidate) => {
@@ -306,8 +370,8 @@ export default function AdminDashboard() {
                               candidate.applyingFor === 'IT'
                                 ? 'default'
                                 : candidate.applyingFor === 'Technical'
-                                ? 'secondary'
-                                : 'outline'
+                                  ? 'secondary'
+                                  : 'outline'
                             }
                           >
                             {candidate.applyingFor}

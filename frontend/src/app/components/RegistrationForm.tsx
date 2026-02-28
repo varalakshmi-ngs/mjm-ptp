@@ -139,7 +139,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
         photoData,
       };
 
-      const response = await fetch("/api/registration", {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/registration`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

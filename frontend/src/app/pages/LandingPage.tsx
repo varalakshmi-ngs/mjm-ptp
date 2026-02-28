@@ -30,7 +30,7 @@ export default function LandingPage() {
               <a href="#about" className="text-gray-700 hover:text-blue-600 font-medium">About</a>
               <a href="#event-details" className="text-gray-700 hover:text-blue-600 font-medium">Event Details</a>
               <button
-                onClick={() => navigate('/admin')}
+                onClick={() => navigate('/register')}
                 className="text-gray-700 hover:bg-amber-300 font-bold cursor-pointer bg-amber-200 h-10 w-40 rounded-xl pb-[2px]"
               >
                 Register
