@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
@@ -28,6 +29,7 @@ interface RegistrationFormData {
   skills: string;
   preferredLocation: string;
   declaration: boolean;
+  otp?: string;
 }
 
 interface RegistrationFormProps {
@@ -42,35 +44,104 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
   const [otpVerified, setOtpVerified] = useState(false);
   const [otp, setOtp] = useState('');
   const [generatedOtp, setGeneratedOtp] = useState('');
-  
-  const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<RegistrationFormData>();
-  
+
+  // const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<RegistrationFormData>();
+  const { register, handleSubmit, formState: { errors }, setValue, watch, getValues } = useForm<RegistrationFormData>();
+
   const watchGender = watch('gender');
   const watchApplyingFor = watch('applyingFor');
   const watchExperience = watch('experience');
 
-  const handleSendOtp = () => {
+  // const handleSendOtp = () => {
+  //   const mobile = watch('mobile');
+  //   if (!mobile || mobile.length !== 10) {
+  //     toast.error('Please enter a valid 10-digit mobile number');
+  //     return;
+  //   }
+
+  //   // Generate a 6-digit OTP
+  //   const newOtp = Math.floor(100000 + Math.random() * 900000).toString();
+  //   setGeneratedOtp(newOtp);
+  //   setOtpSent(true);
+
+  //   // In production, this would send an SMS
+  //   toast.success(`OTP sent to ${mobile}. Demo OTP: ${newOtp}`);
+  // };
+
+  // const handleVerifyOtp = () => {
+  //   if (otp === generatedOtp) {
+  //     setOtpVerified(true);
+  //     toast.success('Mobile number verified successfully!');
+  //   } else {
+  //     toast.error('Invalid OTP. Please try again.');
+  //   }
+  // };
+
+  // const handleSendOtp = async () => {
+  //   const mobile = getValues("mobile");
+  //   try {
+  //     const res = await axios.post("http://localhost:4000/api/otp/send-otp", { mobile });
+  //     if (res.data.success) setOtpSent(true);
+  //   } catch (err) {
+  //     console.error(err);
+  //     alert("Failed to send OTP");
+  //   }
+  // };
+
+  // const handleVerifyOtp = async () => {
+  //   const mobile = getValues("mobile");
+  //   const otp = getValues("otp"); // assuming you have a field for OTP input
+  //   try {
+  //     const res = await axios.post("http://localhost:4000/api/otp/verify-otp", { mobile, otp });
+  //     if (res.data.success) setOtpVerified(true);
+  //     else alert(res.data.message);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
+
+
+  const [sessionId, setSessionId] = useState(''); // store sessionId
+
+  const handleSendOtp = async () => {
     const mobile = watch('mobile');
-    if (!mobile || mobile.length !== 10) {
-      toast.error('Please enter a valid 10-digit mobile number');
-      return;
+    if (!mobile || mobile.length !== 10) return alert('Enter valid 10-digit number');
+
+    try {
+      const res = await axios.post('http://localhost:4000/api/otp/send-otp', { mobile });
+      if (res.data.success) {
+        setOtpSent(true);
+        setSessionId(res.data.sessionId); // store sessionId for verification
+        toast.success('OTP sent successfully');
+      } else {
+        alert(res.data.message);
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Failed to send OTP');
     }
-    
-    // Generate a 6-digit OTP
-    const newOtp = Math.floor(100000 + Math.random() * 900000).toString();
-    setGeneratedOtp(newOtp);
-    setOtpSent(true);
-    
-    // In production, this would send an SMS
-    toast.success(`OTP sent to ${mobile}. Demo OTP: ${newOtp}`);
   };
 
-  const handleVerifyOtp = () => {
-    if (otp === generatedOtp) {
-      setOtpVerified(true);
-      toast.success('Mobile number verified successfully!');
-    } else {
-      toast.error('Invalid OTP. Please try again.');
+  const handleVerifyOtp = async () => {
+    const mobile = watch('mobile');
+    if (!otp) return alert('Enter OTP');
+
+    try {
+      const res = await axios.post('http://localhost:4000/api/otp/verify-otp', {
+        mobile,
+        otp,
+        sessionId, // pass the sessionId returned from send-otp
+      });
+
+      if (res.data.success) {
+        setOtpVerified(true);
+        toast.success('Mobile verified!');
+      } else {
+        alert(res.data.message);
+      }
+    } catch (err) {
+      console.error(err);
+      alert('OTP verification failed');
     }
   };
 
@@ -244,7 +315,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
           </div>
 
           <div className="grid md:grid-cols-2 gap-4">
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <Label htmlFor="mobile">Mobile Number *</Label>
               <div className="flex gap-2">
                 <Input
@@ -278,6 +349,69 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
               {errors.mobile && (
                 <p className="text-sm text-red-500">{errors.mobile.message}</p>
               )}
+              {otpSent && !otpVerified && (
+                <div className="space-y-2">
+                  <Label htmlFor="otp">Enter OTP *</Label>
+                  <div className="flex gap-2">
+                    <Input
+                      id="otp"
+                      placeholder="Enter 6-digit OTP"
+                      maxLength={6}
+                      value={otp}
+                      onChange={(e) => setOtp(e.target.value)}
+                    />
+                    <Button type="button" onClick={handleVerifyOtp}>
+                      Verify
+                    </Button>
+                  </div>
+                </div>
+              )}
+
+            </div> */}
+
+            <div className="space-y-2">
+              <Label htmlFor="mobile">Mobile Number *</Label>
+              <div className="flex gap-2">
+                <Input
+                  id="mobile"
+                  placeholder="10-digit mobile number"
+                  maxLength={10}
+                  {...register('mobile', {
+                    required: 'Mobile number is required',
+                    pattern: {
+                      value: /^[0-9]{10}$/,
+                      message: 'Please enter a valid 10-digit mobile number',
+                    },
+                  })}
+                />
+                {!otpVerified && (
+                  <Button type="button" onClick={handleSendOtp} variant="outline" disabled={otpSent}>
+                    {otpSent ? 'Sent' : 'Send OTP'}
+                  </Button>
+                )}
+                {otpVerified && (
+                  <Button type="button" variant="outline" disabled className="bg-green-50">
+                    <CheckCircle className="h-4 w-4 text-green-600" />
+                  </Button>
+                )}
+              </div>
+              {errors.mobile && <p className="text-sm text-red-500">{errors.mobile.message}</p>}
+
+              {otpSent && !otpVerified && (
+                <div className="space-y-2 mt-2">
+                  <Label htmlFor="otp">Enter OTP *</Label>
+                  <div className="flex gap-2">
+                    <Input
+                      id="otp"
+                      placeholder="Enter 6-digit OTP"
+                      maxLength={6}
+                      value={otp}
+                      onChange={(e) => setOtp(e.target.value)}
+                    />
+                    <Button type="button" onClick={handleVerifyOtp}>Verify</Button>
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="space-y-2">
@@ -300,23 +434,6 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
             </div>
           </div>
 
-          {otpSent && !otpVerified && (
-            <div className="space-y-2">
-              <Label htmlFor="otp">Enter OTP *</Label>
-              <div className="flex gap-2">
-                <Input
-                  id="otp"
-                  placeholder="Enter 6-digit OTP"
-                  maxLength={6}
-                  value={otp}
-                  onChange={(e) => setOtp(e.target.value)}
-                />
-                <Button type="button" onClick={handleVerifyOtp}>
-                  Verify
-                </Button>
-              </div>
-            </div>
-          )}
 
           <div className="space-y-2">
             <Label htmlFor="aadhaar">Aadhaar Number *</Label>
