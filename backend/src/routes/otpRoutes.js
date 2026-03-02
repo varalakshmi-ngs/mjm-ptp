@@ -12,7 +12,7 @@ router.post('/send-otp', async (req, res) => {
   if (!mobile) return res.status(400).json({ success: false, message: 'Mobile number required' });
 
   try {
-    const response = await fetch(`https://2factor.in/API/V1/${apiKey}/SMS/91${mobile}/AUTOGEN`);
+    const response = await fetch(`https://2factor.in/API/V1/${apiKey}/SMS/91${mobile}/AUTOGEN/OTP+TEMPLATE`);
     const data = await response.json();
 
     if (data.Status === 'Success') {
