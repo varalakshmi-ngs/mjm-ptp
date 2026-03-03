@@ -30,7 +30,7 @@ export const initializeAdmin = () => {
   if (!localStorage.getItem(ADMIN_KEY)) {
     localStorage.setItem(ADMIN_KEY, JSON.stringify({
       username: 'admin',
-      password: 'admin123' // In production, this should be hashed
+      password: 'sdvvl@JM26' // In production, this should be hashed
     }));
   }
 };
