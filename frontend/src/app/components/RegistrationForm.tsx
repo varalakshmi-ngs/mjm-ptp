@@ -231,7 +231,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
         govtIdProofData,
       };
 
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/registration`, {
+      const response = await fetch(`https://jobmela.sdvvl.com/registration`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
