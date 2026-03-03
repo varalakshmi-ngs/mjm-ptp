@@ -122,7 +122,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
     if (!mobile || mobile.length !== 10) return alert('Enter valid 10-digit number');
 
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/otp/send-otp`, { mobile });
+      const res = await axios.post(`https://jobmela.sdvvl.com/api/otp/send-otp`, { mobile });
       if (res.data.success) {
         setOtpSent(true);
         setSessionId(res.data.sessionId); // store sessionId for verification
@@ -141,7 +141,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
     if (!otp) return alert('Enter OTP');
 
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/otp/verify-otp`, {
+      const res = await axios.post(`https://jobmela.sdvvl.com/api/otp/verify-otp`, {
         mobile,
         otp,
         sessionId, // pass the sessionId returned from send-otp
