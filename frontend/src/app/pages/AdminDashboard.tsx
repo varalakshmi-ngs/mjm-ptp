@@ -81,31 +81,42 @@ export default function AdminDashboard() {
   }, [searchQuery, filterJobType, filterExperience, candidates]);
 
   const fetchCandidates = async () => {
-    try {
-      const response = await fetch(
-  "https://jobmela.sdvvl.com/api/registration/candidates"
-);
+  try {
+    const response = await fetch(
+      "https://jobmela.sdvvl.com/api/registration/candidates"
+    );
 
-const result = await response.json();
+    const result = await response.json();
 
-if (!response.ok) {
-  throw new Error(result.message || "Failed to fetch");
-}
+    if (!response.ok) {
+      throw new Error(result.message || "Failed to fetch candidates");
+    }
 
-const data = Array.isArray(result) ? result : result.data || [];
+    const data = Array.isArray(result) ? result : result.data || [];
 
-setCandidates(data);
-setFilteredCandidates(data);
-setStats(computeStats(data));
+    setCandidates(data);
+    setFilteredCandidates(data);
+    setStats(computeStats(data));
+
+  } catch (error) {
+    console.error(error);
+    toast.error("Failed to fetch candidates");
+    setCandidates([]);
+    setFilteredCandidates([]);
+  }
+};
+
+  // const fetchCandidates = async () => {
+  //   try {
       // const response = await fetch(`https://jobmela.sdvvl.com/registration/candidates`);
       // const data = await response.json();
       // setCandidates(data);
       // setFilteredCandidates(data);
       // setStats(computeStats(data));
-    } catch (error) {
-      toast.error('Failed to fetch candidates');
-    }
-  };
+  //   } catch (error) {
+  //     toast.error('Failed to fetch candidates');
+  //   }
+  // };
 
   // const applyFilters = () => {
   //   let filtered = candidates;
