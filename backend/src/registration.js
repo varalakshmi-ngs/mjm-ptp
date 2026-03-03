@@ -94,13 +94,26 @@ router.post(
 );
 
 // Admin: Get all candidates
+// router.get('/candidates', async (req, res) => {
+//   try {
+//     const [rows] = await pool.query('SELECT id, full_name, father_name, date_of_birth, gender, mobile, email, aadhaar, qualification, specialization, year_of_passing, percentage, applying_for, experience, skills, preferred_location, created_at, govt_id_proof FROM candidates ORDER BY created_at DESC');
+//     res.json(rows);
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ message: 'Server error' });
+//   }
+// });
 router.get('/candidates', async (req, res) => {
   try {
-    const [rows] = await pool.query('SELECT id, full_name, father_name, date_of_birth, gender, mobile, email, aadhaar, qualification, specialization, year_of_passing, percentage, applying_for, experience, skills, preferred_location, created_at, govt_id_proof FROM candidates ORDER BY created_at DESC');
-    res.json(rows);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Server error' });
+    const [rows] = await db.query(
+      "SELECT * FROM candidates ORDER BY created_at DESC"
+    );
+
+    res.status(200).json(rows);
+
+  } catch (error) {
+    console.error("Fetch Candidates Error:", error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 });
 
