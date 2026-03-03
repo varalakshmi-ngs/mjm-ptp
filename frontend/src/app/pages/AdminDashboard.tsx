@@ -82,7 +82,7 @@ export default function AdminDashboard() {
 
   const fetchCandidates = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/registration/candidates`);
+      const response = await fetch(`https://jobmela.sdvvl.com/registration/candidates`);
       const data = await response.json();
       setCandidates(data);
       setFilteredCandidates(data);
