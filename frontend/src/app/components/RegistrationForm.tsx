@@ -37,6 +37,69 @@ interface RegistrationFormProps {
 }
 
 export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
+      // Govt ID Proof state
+      const [govtIdProofFile, setGovtIdProofFile] = useState<File | null>(null);
+
+      const handleGovtIdProofChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+          if (!file.type.startsWith('image/')) {
+            toast.error('Please upload an image file for Govt ID Proof');
+            return;
+          }
+          if (file.size > 2 * 1024 * 1024) {
+            toast.error('Govt ID Proof image size should be less than 2MB');
+            return;
+          }
+          setGovtIdProofFile(file);
+          toast.success('Govt ID Proof uploaded successfully');
+        }
+      };
+    // Camera capture state
+    const [showCamera, setShowCamera] = useState(false);
+    const [cameraStream, setCameraStream] = useState<MediaStream | null>(null);
+    const [cameraError, setCameraError] = useState<string | null>(null);
+    const videoRef = useState<HTMLVideoElement | null>(null);
+
+    // Camera capture handler
+    const handleOpenCamera = async () => {
+      setCameraError(null);
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        setCameraStream(stream);
+        setShowCamera(true);
+        setTimeout(() => {
+          if (videoRef[0]) videoRef[0].srcObject = stream;
+        }, 100);
+      } catch (err) {
+        setCameraError('Unable to access camera. Please allow camera permissions.');
+      }
+    };
+
+    const handleCapturePhoto = () => {
+      if (!videoRef[0]) return;
+      const canvas = document.createElement('canvas');
+      canvas.width = videoRef[0].videoWidth;
+      canvas.height = videoRef[0].videoHeight;
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.drawImage(videoRef[0], 0, 0, canvas.width, canvas.height);
+        canvas.toBlob(blob => {
+          if (blob) {
+            const file = new File([blob], 'captured_photo.png', { type: 'image/png' });
+            setPhotoFile(file);
+            toast.success('Photo captured successfully');
+            setShowCamera(false);
+            if (cameraStream) cameraStream.getTracks().forEach(track => track.stop());
+          }
+        }, 'image/png');
+      }
+    };
+
+    const handleCloseCamera = () => {
+      setShowCamera(false);
+      if (cameraStream) cameraStream.getTracks().forEach(track => track.stop());
+    };
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [photoFile, setPhotoFile] = useState<File | null>(null);
@@ -52,55 +115,6 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
   const watchApplyingFor = watch('applyingFor');
   const watchExperience = watch('experience');
 
-  // const handleSendOtp = () => {
-  //   const mobile = watch('mobile');
-  //   if (!mobile || mobile.length !== 10) {
-  //     toast.error('Please enter a valid 10-digit mobile number');
-  //     return;
-  //   }
-
-  //   // Generate a 6-digit OTP
-  //   const newOtp = Math.floor(100000 + Math.random() * 900000).toString();
-  //   setGeneratedOtp(newOtp);
-  //   setOtpSent(true);
-
-  //   // In production, this would send an SMS
-  //   toast.success(`OTP sent to ${mobile}. Demo OTP: ${newOtp}`);
-  // };
-
-  // const handleVerifyOtp = () => {
-  //   if (otp === generatedOtp) {
-  //     setOtpVerified(true);
-  //     toast.success('Mobile number verified successfully!');
-  //   } else {
-  //     toast.error('Invalid OTP. Please try again.');
-  //   }
-  // };
-
-  // const handleSendOtp = async () => {
-  //   const mobile = getValues("mobile");
-  //   try {
-  //     const res = await axios.post("http://localhost:4000/api/otp/send-otp", { mobile });
-  //     if (res.data.success) setOtpSent(true);
-  //   } catch (err) {
-  //     console.error(err);
-  //     alert("Failed to send OTP");
-  //   }
-  // };
-
-  // const handleVerifyOtp = async () => {
-  //   const mobile = getValues("mobile");
-  //   const otp = getValues("otp"); // assuming you have a field for OTP input
-  //   try {
-  //     const res = await axios.post("http://localhost:4000/api/otp/verify-otp", { mobile, otp });
-  //     if (res.data.success) setOtpVerified(true);
-  //     else alert(res.data.message);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
-
-
   const [sessionId, setSessionId] = useState(''); // store sessionId
 
   const handleSendOtp = async () => {
@@ -108,7 +122,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
     if (!mobile || mobile.length !== 10) return alert('Enter valid 10-digit number');
 
     try {
-      const res = await axios.post('/api/otp/send-otp', { mobile });
+      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/otp/send-otp`, { mobile });
       if (res.data.success) {
         setOtpSent(true);
         setSessionId(res.data.sessionId); // store sessionId for verification
@@ -127,7 +141,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
     if (!otp) return alert('Enter OTP');
 
     try {
-      const res = await axios.post('/api/otp/verify-otp', {
+      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/otp/verify-otp`, {
         mobile,
         otp,
         sessionId, // pass the sessionId returned from send-otp
@@ -193,6 +207,11 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
       return;
     }
 
+
+    if (!govtIdProofFile) {
+      toast.error('Please upload your Govt ID Proof (PAN, DL, etc)');
+      return;
+    }
     if (!data.declaration) {
       toast.error('Please accept the declaration');
       return;
@@ -203,11 +222,13 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
     try {
       const resumeData = await fileToBase64(resumeFile);
       const photoData = await fileToBase64(photoFile);
+      const govtIdProofData = await fileToBase64(govtIdProofFile);
 
       const payload = {
         ...data,
         resumeData,
         photoData,
+        govtIdProofData,
       };
 
       const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/registration`, {
@@ -315,60 +336,6 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
           </div>
 
           <div className="grid md:grid-cols-2 gap-4">
-            {/* <div className="space-y-2">
-              <Label htmlFor="mobile">Mobile Number *</Label>
-              <div className="flex gap-2">
-                <Input
-                  id="mobile"
-                  placeholder="10-digit mobile number"
-                  maxLength={10}
-                  {...register('mobile', {
-                    required: 'Mobile number is required',
-                    pattern: {
-                      value: /^[0-9]{10}$/,
-                      message: 'Please enter a valid 10-digit mobile number',
-                    },
-                  })}
-                />
-                {!otpVerified && (
-                  <Button
-                    type="button"
-                    onClick={handleSendOtp}
-                    variant="outline"
-                    disabled={otpSent}
-                  >
-                    {otpSent ? 'Sent' : 'Send OTP'}
-                  </Button>
-                )}
-                {otpVerified && (
-                  <Button type="button" variant="outline" disabled className="bg-green-50">
-                    <CheckCircle className="h-4 w-4 text-green-600" />
-                  </Button>
-                )}
-              </div>
-              {errors.mobile && (
-                <p className="text-sm text-red-500">{errors.mobile.message}</p>
-              )}
-              {otpSent && !otpVerified && (
-                <div className="space-y-2">
-                  <Label htmlFor="otp">Enter OTP *</Label>
-                  <div className="flex gap-2">
-                    <Input
-                      id="otp"
-                      placeholder="Enter 6-digit OTP"
-                      maxLength={6}
-                      value={otp}
-                      onChange={(e) => setOtp(e.target.value)}
-                    />
-                    <Button type="button" onClick={handleVerifyOtp}>
-                      Verify
-                    </Button>
-                  </div>
-                </div>
-              )}
-
-            </div> */}
-
             <div className="space-y-2">
               <Label htmlFor="mobile">Mobile Number *</Label>
               <div className="flex gap-2">
@@ -611,7 +578,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
             <FileText className="h-5 w-5" />
             Document Upload
           </CardTitle>
-          <CardDescription>Upload your resume and photograph</CardDescription>
+          <CardDescription>Upload your resume, photograph, and Govt ID proof</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
@@ -643,10 +610,42 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                 onChange={handlePhotoChange}
                 className="cursor-pointer"
               />
+              <Button type="button" variant="outline" onClick={handleOpenCamera}>
+                Capture Photo
+              </Button>
               {photoFile && (
                 <span className="text-sm text-green-600 flex items-center gap-1">
                   <CheckCircle className="h-4 w-4" />
                   {photoFile.name}
+                </span>
+              )}
+            </div>
+            {showCamera && (
+              <div className="mt-4 flex flex-col items-center gap-2">
+                <video ref={el => (videoRef[0] = el)} autoPlay playsInline className="rounded-lg border w-64 h-48 object-cover" />
+                <div className="flex gap-2 mt-2">
+                  <Button type="button" onClick={handleCapturePhoto} variant="default">Take Photo</Button>
+                  <Button type="button" onClick={handleCloseCamera} variant="outline">Cancel</Button>
+                </div>
+                {cameraError && <p className="text-sm text-red-500">{cameraError}</p>}
+              </div>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="govtIdProof">Govt ID Proof (PAN, DL, etc, max 2MB) *</Label>
+            <div className="flex items-center gap-4">
+              <Input
+                id="govtIdProof"
+                type="file"
+                accept="image/*"
+                onChange={handleGovtIdProofChange}
+                className="cursor-pointer"
+              />
+              {govtIdProofFile && (
+                <span className="text-sm text-green-600 flex items-center gap-1">
+                  <CheckCircle className="h-4 w-4" />
+                  {govtIdProofFile.name}
                 </span>
               )}
             </div>

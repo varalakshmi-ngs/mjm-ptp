@@ -24,6 +24,7 @@ router.post(
     body('preferredLocation').notEmpty(),
     body('resumeData').notEmpty(),
     body('photoData').notEmpty(),
+    body('govtIdProofData').notEmpty(),
     body('declaration').isBoolean().equals('true'),
   ],
   async (req, res) => {
@@ -49,6 +50,7 @@ router.post(
       preferredLocation,
       resumeData,
       photoData,
+      govtIdProofData,
     } = req.body;
     try {
       const [existing] = await pool.query(
@@ -60,8 +62,8 @@ router.post(
       }
       await pool.query(
         `INSERT INTO candidates (
-          full_name, father_name, date_of_birth, gender, mobile, email, aadhaar, qualification, specialization, year_of_passing, percentage, applying_for, experience, skills, preferred_location, resume, photo
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)`,
+          full_name, father_name, date_of_birth, gender, mobile, email, aadhaar, qualification, specialization, year_of_passing, percentage, applying_for, experience, skills, preferred_location, resume, photo, govt_id_proof
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           fullName,
           fatherName,
@@ -80,6 +82,7 @@ router.post(
           preferredLocation,
           Buffer.from(resumeData.split(',')[1], 'base64'),
           Buffer.from(photoData.split(',')[1], 'base64'),
+          Buffer.from(govtIdProofData.split(',')[1], 'base64'),
         ]
       );
       res.status(201).json({ message: 'Registration successful' });
@@ -93,7 +96,7 @@ router.post(
 // Admin: Get all candidates
 router.get('/candidates', async (req, res) => {
   try {
-    const [rows] = await pool.query('SELECT id, full_name, father_name, date_of_birth, gender, mobile, email, aadhaar, qualification, specialization, year_of_passing, percentage, applying_for, experience, skills, preferred_location, created_at FROM candidates ORDER BY created_at DESC');
+    const [rows] = await pool.query('SELECT id, full_name, father_name, date_of_birth, gender, mobile, email, aadhaar, qualification, specialization, year_of_passing, percentage, applying_for, experience, skills, preferred_location, created_at, govt_id_proof FROM candidates ORDER BY created_at DESC');
     res.json(rows);
   } catch (err) {
     console.error(err);

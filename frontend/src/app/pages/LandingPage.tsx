@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router';
 import { Hero } from '../components/Hero';
 import { Building2, Users, Briefcase, TrendingUp, MapPin, Phone, Mail } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import logo from "../../../public/b5dc0401-0a74-4242-aad1-2fc3e46169b5-removebg-preview.png"
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -15,11 +14,11 @@ export default function LandingPage() {
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Header */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
+        <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-lg">
-                <img src={logo} alt="sdvvl" className='h-20 w-20' />
+                <img src="/b5dc0401-0a74-4242-aad1-2fc3e46169b5-removebg-preview.png" alt="sdvvl" className='h-20 w-20' />
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">SDVVL</h1>
@@ -29,6 +28,7 @@ export default function LandingPage() {
             <nav className="hidden md:flex items-center gap-6 cursor-pointer">
               <a href="#home" className="text-gray-700 hover:text-blue-600 font-medium">Home</a>
               <a href="#about" className="text-gray-700 hover:text-blue-600 font-medium">About</a>
+              <a href="#companies" className="text-gray-700 hover:text-blue-600 font-medium">Our Companies</a>
               <a href="#event-details" className="text-gray-700 hover:text-blue-600 font-medium">Event Details</a>
               <button
                 onClick={() => navigate('/register')}
@@ -37,8 +37,12 @@ export default function LandingPage() {
                 Register
               </button>
             </nav>
+
           </div>
+
         </div>
+
+
       </header>
 
       {/* Hero Section */}
@@ -134,6 +138,85 @@ export default function LandingPage() {
                 </p>
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+      {/* Companies Section */}
+      <section id="companies" className="py-12 bg-amber-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-center text-4xl font-bold mb-8">Our Companies</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            {/* First part: major companies (25% width) */}
+            <div className=' mt-[250px]'>
+              <div className="flex flex-col items-center justify-center bg-white rounded-xl shadow-lg border-2 border-amber-400 px-8 py-10 h-[500px] mb-[150px]">
+                {/* <img src="/logos/sdvvl.png" alt="SDVVL logo" className="h-20 w-auto mb-4 object-contain" /> */}
+                <div className="flex flex-col items-center gap-2">
+                  <img src="/logos/sdvvl.png" alt="SDVVL logo" />
+                  <span className="text-xl font-bold text-amber-900 text-center border-b-2">SDVVL SURVEY & CONSTRUCTION PVT LTD</span>
+                  <span className="text-xl font-bold text-amber-900 text-center">SDVVL SKILL HUB</span>
+                  <a href="https://sdvvl.com" target='_blank' className='text-blue-500'>www.sdvvl.com</a>
+                  <p>sdvvlcompany@gmail.com</p>
+                  <p>+91 81216 52938</p>
+
+                </div>
+
+              </div>
+              <div className="flex flex-col items-center justify-center bg-white rounded-xl shadow-lg border-2 border-amber-400 px-8 py-10 h-[500px]">
+                {/* <img src="/logos/sdvvl.png" alt="SDVVL logo" className="h-20 w-auto mb-4 object-contain" /> */}
+                <div className="flex flex-col items-center gap-2">
+                  <img src="/logos/ngs.png" alt="SDVVL logo" />
+                  <span className="text-xl font-bold text-amber-900 text-center">Nuhvin Global Services Private Limited</span>
+                  <a href="https://nuhvin.com" target='_blank' className='text-blue-500'>www.nuhvin.com</a>
+                  <p>ngsinfo@nuhvin.com</p>
+                  <p>+91 93922 96850</p>
+                </div>
+              </div>
+            </div>
+            {/* Remaining 3 parts: other companies divided equally */}
+            {Array.from({ length: 3 }).map((_, colIdx) => (
+              <div key={colIdx} className="flex flex-col gap-6">
+                {[
+                  // { name: "NUHVIN GLOBAL SERVICES PVT LTD", logo: null },
+                  { name: "PINK MOON TECHNOLOGIES PVT LTD", logo: "/logos/pinkmoon.png" },
+                  { name: "SRAM SOLUTIONS PVT LTD", logo: "/logos/sram.png" },
+                  { name: "FLYEX-CARGO", logo: "/logos/flyex.png" },
+                  { name: "MIRAV TECHNOLOGIES", logo: "/logos/mirav.png" },
+                  { name: "BYTESKILLS TECHNOLOGIES PVT LTD", logo: "logos/byteskills.png" },
+                  { name: "GEONFY SOLUTIONS PVT LTD", logo: "logos/geoinfy.png" },
+                  { name: "AIRTEL BLACK", logo: "/logos/airtel-black.jpg" },
+                  { name: "AIRTEL WIFI", logo: "/logos/airtel-wifi.jpg" },
+                  { name: "AXIS BANK", logo: "/logos/axis-bank.png" },
+                  { name: "VARUN MOTORS", logo: "logos/varun-motors.jpg" },
+                  { name: "DECCAN FINE CHEMICALS(India) Pvt.Ltd.", logo: "/logos/deccan.jpg" },
+                  { name: "Auro Bindo", logo: "/logos/auro-bindo.png" },
+                  { name: "BOB Cards", logo: "/logos/bob-card.jpg" },
+                  { name: "SBI Payments", logo: "logos/sbi-payments.png" },
+                  { name: "Apollo Pharmacy", logo: "/logos/apollo.jpg" },
+                  { name: "SRI GOPAL AUTOMOTIVE LTD", logo: "/logos/sree-gopal.jpg" },
+                  { name: "IFB Industries", logo: "/logos/ifb.png" },
+                  { name: "Muthoot Finance Ltd.", logo: "/logos/muthoot.png" },
+                  { name: "LG Authorised Service Center", logo: "/logos/lg.jpg" },
+                  { name: "DD Solar Solutions", logo: "/logos/dd-solar.png" },
+                  { name: "Team Lease", logo: "/logos/team-lease.webp" },
+                  { name: "Tata Electronics", logo: "/logos/tata-electronics.png" },
+                  { name: "KIA", logo: "/logos/kia.png" },
+                  { name: "Tech Mahendra", logo: "/logos/tech-mahindra.png" },
+                  { name: "Trident One Associates", logo: "/logos/trident.jpg" },
+                  { name: "Bright Path Education Services", logo: "/logos/bright-path.jpg" },
+                  { name: "Makers Mind", logo: "logos/makersmind.jpg" },
+                  { name: "Golden Manpower Consultants(Dubai)", logo: "/logos/golden.jpg" }
+                ]
+                  .filter((_, idx) => idx % 3 === colIdx)
+                  .map((company, idx) => (
+                    <div key={company.name} className="bg-white rounded-xl shadow hover:shadow-lg p-4 flex flex-col items-center justify-center text-center font-semibold text-gray-800 border border-amber-200 transition-all min-h-[100px]">
+                      {company.logo ? (
+                        <img src={company.logo} alt={company.name + ' logo'} className="h-20 w-auto mb-2 object-contain" />
+                      ) : null}
+                      <span>{company.name}</span>
+                    </div>
+                  ))}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -249,7 +332,7 @@ export default function LandingPage() {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <div className="bg-white p-2 rounded-lg">
-                  <img src={logo} alt="sdvvl" className='h-20 w-20' />
+                  <img src="/b5dc0401-0a74-4242-aad1-2fc3e46169b5-removebg-preview.png" alt="sdvvl" className='h-20 w-20' />
                 </div>
                 <h3 className="text-xl font-bold text-white">SDVVL</h3>
               </div>
