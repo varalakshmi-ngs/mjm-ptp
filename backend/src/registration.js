@@ -105,7 +105,7 @@ router.post(
 // });
 router.get('/candidates', async (req, res) => {
   try {
-    const [rows] = await db.query(
+    const [rows] = await pool.query(
       "SELECT * FROM candidates ORDER BY created_at DESC"
     );
 
@@ -116,5 +116,4 @@ router.get('/candidates', async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
-
 export default router;
