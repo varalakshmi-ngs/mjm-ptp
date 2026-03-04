@@ -1,3 +1,274 @@
+// import { useState } from 'react';
+// import { useForm } from 'react-hook-form';
+// import axios from 'axios';
+// import { Button } from '../components/ui/button';
+// import { Input } from '../components/ui/input';
+// import { Label } from '../components/ui/label';
+// import { Textarea } from '../components/ui/textarea';
+// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
+// import { Checkbox } from '../components/ui/checkbox';
+// import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+// import { Loader2, Upload, User, GraduationCap, Briefcase, FileText, CheckCircle } from 'lucide-react';
+// import { toast } from 'sonner';
+// import { type Candidate } from '../utils/storage';
+
+// interface RegistrationFormData {
+//   fullName: string;
+//   fatherName: string;
+//   dateOfBirth: string;
+//   gender: string;
+//   mobile: string;
+//   email: string;
+//   aadhaar: string;
+//   qualification: string;
+//   specialization: string;
+//   yearOfPassing: string;
+//   percentage: string;
+//   applyingFor: string;
+//   experience: string;
+//   skills: string;
+//   preferredLocation: string;
+//   declaration: boolean;
+//   otp?: string;
+// }
+
+// interface RegistrationFormProps {
+//   onSuccess: () => void;
+// }
+
+// export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
+//   // Govt ID Proof state
+//   const [govtIdProofFile, setGovtIdProofFile] = useState<File | null>(null);
+
+//   const handleGovtIdProofChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     const file = e.target.files?.[0];
+//     if (file) {
+//       if (!file.type.startsWith('image/')) {
+//         toast.error('Please upload an image file for Govt ID Proof');
+//         return;
+//       }
+//       if (file.size > 2 * 1024 * 1024) {
+//         toast.error('Govt ID Proof image size should be less than 2MB');
+//         return;
+//       }
+//       setGovtIdProofFile(file);
+//       toast.success('Govt ID Proof uploaded successfully');
+//     }
+//   };
+//   // Camera capture state
+//   const [showCamera, setShowCamera] = useState(false);
+//   const [cameraStream, setCameraStream] = useState<MediaStream | null>(null);
+//   const [cameraError, setCameraError] = useState<string | null>(null);
+//   const videoRef = useState<HTMLVideoElement | null>(null);
+
+//   // Camera capture handler
+//   const handleOpenCamera = async () => {
+//     setCameraError(null);
+//     try {
+//       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+//       setCameraStream(stream);
+//       setShowCamera(true);
+//       setTimeout(() => {
+//         if (videoRef[0]) videoRef[0].srcObject = stream;
+//       }, 100);
+//     } catch (err) {
+//       setCameraError('Unable to access camera. Please allow camera permissions.');
+//     }
+//   };
+
+//   const handleCapturePhoto = () => {
+//     if (!videoRef[0]) return;
+//     const canvas = document.createElement('canvas');
+//     canvas.width = videoRef[0].videoWidth;
+//     canvas.height = videoRef[0].videoHeight;
+//     const ctx = canvas.getContext('2d');
+//     if (ctx) {
+//       ctx.drawImage(videoRef[0], 0, 0, canvas.width, canvas.height);
+//       canvas.toBlob(blob => {
+//         if (blob) {
+//           const file = new File([blob], 'captured_photo.png', { type: 'image/png' });
+//           setPhotoFile(file);
+//           toast.success('Photo captured successfully');
+//           setShowCamera(false);
+//           if (cameraStream) cameraStream.getTracks().forEach(track => track.stop());
+//         }
+//       }, 'image/png');
+//     }
+//   };
+
+//   const handleCloseCamera = () => {
+//     setShowCamera(false);
+//     if (cameraStream) cameraStream.getTracks().forEach(track => track.stop());
+//   };
+//   const [isSubmitting, setIsSubmitting] = useState(false);
+//   const [resumeFile, setResumeFile] = useState<File | null>(null);
+//   const [photoFile, setPhotoFile] = useState<File | null>(null);
+//   const [otpSent, setOtpSent] = useState(false);
+//   const [otpVerified, setOtpVerified] = useState(false);
+//   const [otp, setOtp] = useState('');
+//   const [generatedOtp, setGeneratedOtp] = useState('');
+
+//   // const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<RegistrationFormData>();
+//   const { register, handleSubmit, formState: { errors }, setValue, watch, getValues } = useForm<RegistrationFormData>();
+
+//   const watchGender = watch('gender');
+//   const watchApplyingFor = watch('applyingFor');
+//   const watchExperience = watch('experience');
+
+//   const [sessionId, setSessionId] = useState(''); // store sessionId
+
+//   const handleSendOtp = async () => {
+//     const mobile = watch('mobile');
+//     if (!mobile || mobile.length !== 10) return alert('Enter valid 10-digit number');
+
+//     try {
+//       const res = await axios.post(`https://jobmela.sdvvl.com/api/otp/send-otp`, { mobile });
+//       if (res.data.success) {
+//         setOtpSent(true);
+//         setSessionId(res.data.sessionId); // store sessionId for verification
+//         toast.success('OTP sent successfully');
+//       } else {
+//         alert(res.data.message);
+//       }
+//     } catch (err) {
+//       console.error(err);
+//       alert('Failed to send OTP');
+//     }
+//   };
+
+//   const handleVerifyOtp = async () => {
+//     const mobile = watch('mobile');
+//     if (!otp) return alert('Enter OTP');
+
+//     try {
+//       const res = await axios.post(`https://jobmela.sdvvl.com/api/otp/verify-otp`, {
+//         mobile,
+//         otp,
+//         sessionId, // pass the sessionId returned from send-otp
+//       });
+
+//       if (res.data.success) {
+//         setOtpVerified(true);
+//         toast.success('Mobile verified!');
+//       } else {
+//         alert(res.data.message);
+//       }
+//     } catch (err) {
+//       console.error(err);
+//       alert('OTP verification failed');
+//     }
+//   };
+
+//   const handleResumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     const file = e.target.files?.[0];
+//     if (file) {
+//       if (file.type !== 'application/pdf') {
+//         toast.error('Please upload a PDF file');
+//         return;
+//       }
+//       if (file.size > 2 * 1024 * 1024) {
+//         toast.error('File size should be less than 2MB');
+//         return;
+//       }
+//       setResumeFile(file);
+//       toast.success('Resume uploaded successfully');
+//     }
+//   };
+
+//   const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     const file = e.target.files?.[0];
+//     if (file) {
+//       if (!file.type.startsWith('image/')) {
+//         toast.error('Please upload an image file');
+//         return;
+//       }
+//       if (file.size > 500 * 1024) {
+//         toast.error('Image size should be less than 500KB');
+//         return;
+//       }
+//       setPhotoFile(file);
+//       toast.success('Photo uploaded successfully');
+//     }
+//   };
+// const onSubmit = async (data: RegistrationFormData) => {
+//   if (!otpVerified) {
+//     toast.error('Please verify your mobile number first');
+//     return;
+//   }
+
+//   if (!resumeFile) {
+//     toast.error('Please upload your resume');
+//     return;
+//   }
+
+//   if (!photoFile) {
+//     toast.error('Please upload your photo');
+//     return;
+//   }
+
+//   if (!govtIdProofFile) {
+//     toast.error('Please upload your Govt ID Proof (PAN, DL, etc)');
+//     return;
+//   }
+
+//   if (!data.declaration) {
+//     toast.error('Please accept the declaration');
+//     return;
+//   }
+
+//   setIsSubmitting(true);
+
+//   try {
+//     // Convert files to base64
+//     const resumeData = await fileToBase64(resumeFile);
+//     const photoData = await fileToBase64(photoFile);
+//     const govtIdProofData = await fileToBase64(govtIdProofFile);
+
+//     const payload = {
+//       ...data,
+//       resumeData,
+//       photoData,
+//       govtIdProofData,
+//     };
+
+//     // ✅ Use the VITE_API_BASE_URL correctly
+//     const API_BASE = import.meta.env.VITE_API_BASE_URL;
+//     const response = await fetch(`${API_BASE}/api/registration`, {
+//       method: 'POST',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify(payload),
+//     });
+
+//     let result: { message?: string } = { message: '' };
+//     try {
+//       result = await response.json();
+//     } catch {
+//       result = { message: 'Server returned non-JSON response' };
+//     }
+
+//     setIsSubmitting(false);
+
+//     if (response.ok) {
+//       toast.success('Registration completed successfully!');
+//       onSuccess();
+//     } else {
+//       toast.error(result.message || 'Registration failed');
+//     }
+//   } catch (error) {
+//     console.error('Registration error:', error);
+//     setIsSubmitting(false);
+//     toast.error('Server error. Please try again later.');
+//   }
+// };
+//   const fileToBase64 = (file: File): Promise<string> => {
+//     return new Promise((resolve, reject) => {
+//       const reader = new FileReader();
+//       reader.readAsDataURL(file);
+//       reader.onload = () => resolve(reader.result as string);
+//       reader.onerror = error => reject(error);
+//     });
+//   };
+
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
@@ -37,95 +308,37 @@ interface RegistrationFormProps {
 }
 
 export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
-  // Govt ID Proof state
   const [govtIdProofFile, setGovtIdProofFile] = useState<File | null>(null);
-
-  const handleGovtIdProofChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      if (!file.type.startsWith('image/')) {
-        toast.error('Please upload an image file for Govt ID Proof');
-        return;
-      }
-      if (file.size > 2 * 1024 * 1024) {
-        toast.error('Govt ID Proof image size should be less than 2MB');
-        return;
-      }
-      setGovtIdProofFile(file);
-      toast.success('Govt ID Proof uploaded successfully');
-    }
-  };
-  // Camera capture state
-  const [showCamera, setShowCamera] = useState(false);
-  const [cameraStream, setCameraStream] = useState<MediaStream | null>(null);
-  const [cameraError, setCameraError] = useState<string | null>(null);
-  const videoRef = useState<HTMLVideoElement | null>(null);
-
-  // Camera capture handler
-  const handleOpenCamera = async () => {
-    setCameraError(null);
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-      setCameraStream(stream);
-      setShowCamera(true);
-      setTimeout(() => {
-        if (videoRef[0]) videoRef[0].srcObject = stream;
-      }, 100);
-    } catch (err) {
-      setCameraError('Unable to access camera. Please allow camera permissions.');
-    }
-  };
-
-  const handleCapturePhoto = () => {
-    if (!videoRef[0]) return;
-    const canvas = document.createElement('canvas');
-    canvas.width = videoRef[0].videoWidth;
-    canvas.height = videoRef[0].videoHeight;
-    const ctx = canvas.getContext('2d');
-    if (ctx) {
-      ctx.drawImage(videoRef[0], 0, 0, canvas.width, canvas.height);
-      canvas.toBlob(blob => {
-        if (blob) {
-          const file = new File([blob], 'captured_photo.png', { type: 'image/png' });
-          setPhotoFile(file);
-          toast.success('Photo captured successfully');
-          setShowCamera(false);
-          if (cameraStream) cameraStream.getTracks().forEach(track => track.stop());
-        }
-      }, 'image/png');
-    }
-  };
-
-  const handleCloseCamera = () => {
-    setShowCamera(false);
-    if (cameraStream) cameraStream.getTracks().forEach(track => track.stop());
-  };
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [photoFile, setPhotoFile] = useState<File | null>(null);
   const [otpSent, setOtpSent] = useState(false);
   const [otpVerified, setOtpVerified] = useState(false);
   const [otp, setOtp] = useState('');
   const [generatedOtp, setGeneratedOtp] = useState('');
+  const [sessionId, setSessionId] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<RegistrationFormData>();
-  const { register, handleSubmit, formState: { errors }, setValue, watch, getValues } = useForm<RegistrationFormData>();
+  const [showCamera, setShowCamera] = useState(false);
+  const [cameraStream, setCameraStream] = useState<MediaStream | null>(null);
+  const [cameraError, setCameraError] = useState<string | null>(null);
+  const videoRef = useState<HTMLVideoElement | null>(null);
+
+  const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<RegistrationFormData>();
 
   const watchGender = watch('gender');
   const watchApplyingFor = watch('applyingFor');
   const watchExperience = watch('experience');
 
-  const [sessionId, setSessionId] = useState(''); // store sessionId
-
+  // ---------------- OTP Handlers ----------------
   const handleSendOtp = async () => {
     const mobile = watch('mobile');
     if (!mobile || mobile.length !== 10) return alert('Enter valid 10-digit number');
 
     try {
-      const res = await axios.post(`https://jobmela.sdvvl.com/api/otp/send-otp`, { mobile });
+      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/otp/send-otp`, { mobile });
       if (res.data.success) {
         setOtpSent(true);
-        setSessionId(res.data.sessionId); // store sessionId for verification
+        setSessionId(res.data.sessionId);
         toast.success('OTP sent successfully');
       } else {
         alert(res.data.message);
@@ -141,10 +354,10 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
     if (!otp) return alert('Enter OTP');
 
     try {
-      const res = await axios.post(`https://jobmela.sdvvl.com/api/otp/verify-otp`, {
+      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/otp/verify-otp`, {
         mobile,
         otp,
-        sessionId, // pass the sessionId returned from send-otp
+        sessionId,
       });
 
       if (res.data.success) {
@@ -159,179 +372,125 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
     }
   };
 
+  // ---------------- File Handlers ----------------
   const handleResumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      if (file.type !== 'application/pdf') {
-        toast.error('Please upload a PDF file');
-        return;
-      }
-      if (file.size > 2 * 1024 * 1024) {
-        toast.error('File size should be less than 2MB');
-        return;
-      }
-      setResumeFile(file);
-      toast.success('Resume uploaded successfully');
-    }
+    if (!file) return;
+    if (file.type !== 'application/pdf') return toast.error('Please upload a PDF file');
+    if (file.size > 2 * 1024 * 1024) return toast.error('File size should be less than 2MB');
+    setResumeFile(file);
+    toast.success('Resume uploaded successfully');
   };
 
   const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      if (!file.type.startsWith('image/')) {
-        toast.error('Please upload an image file');
-        return;
-      }
-      if (file.size > 500 * 1024) {
-        toast.error('Image size should be less than 500KB');
-        return;
-      }
-      setPhotoFile(file);
-      toast.success('Photo uploaded successfully');
-    }
+    if (!file) return;
+    if (!file.type.startsWith('image/')) return toast.error('Please upload an image file');
+    if (file.size > 500 * 1024) return toast.error('Image size should be less than 500KB');
+    setPhotoFile(file);
+    toast.success('Photo uploaded successfully');
   };
 
-  // const onSubmit = async (data: RegistrationFormData) => {
-  //   if (!otpVerified) {
-  //     toast.error('Please verify your mobile number first');
-  //     return;
-  //   }
+  const handleGovtIdProofChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!file.type.startsWith('image/')) return toast.error('Please upload an image file for Govt ID Proof');
+    if (file.size > 2 * 1024 * 1024) return toast.error('Govt ID Proof image size should be less than 2MB');
+    setGovtIdProofFile(file);
+    toast.success('Govt ID Proof uploaded successfully');
+  };
 
-  //   if (!resumeFile) {
-  //     toast.error('Please upload your resume');
-  //     return;
-  //   }
-
-  //   if (!photoFile) {
-  //     toast.error('Please upload your photo');
-  //     return;
-  //   }
-
-
-  //   if (!govtIdProofFile) {
-  //     toast.error('Please upload your Govt ID Proof (PAN, DL, etc)');
-  //     return;
-  //   }
-  //   if (!data.declaration) {
-  //     toast.error('Please accept the declaration');
-  //     return;
-  //   }
-
-  //   setIsSubmitting(true);
-
-  //   try {
-  //     const resumeData = await fileToBase64(resumeFile);
-  //     const photoData = await fileToBase64(photoFile);
-  //     const govtIdProofData = await fileToBase64(govtIdProofFile);
-
-  //     const payload = {
-  //       ...data,
-  //       resumeData,
-  //       photoData,
-  //       govtIdProofData,
-  //     };
-
-  //     const response = await fetch('https://jobmela.sdvvl.com/api/registration/', {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(payload),
-  //     });
-
-  //     setIsSubmitting(false);
-
-  //     if (response.ok) {
-  //       toast.success("Registration completed successfully!");
-  //       onSuccess();
-  //     } else {
-  //       const result = await response.json();
-  //       toast.error(result.message || "Registration failed");
-  //     }
-  //   } catch (error) {
-  //     setIsSubmitting(false);
-  //     toast.error("Server error. Please try again later.");
-  //   }
-  // };
-const onSubmit = async (data: RegistrationFormData) => {
-  if (!otpVerified) {
-    toast.error('Please verify your mobile number first');
-    return;
-  }
-
-  if (!resumeFile) {
-    toast.error('Please upload your resume');
-    return;
-  }
-
-  if (!photoFile) {
-    toast.error('Please upload your photo');
-    return;
-  }
-
-  if (!govtIdProofFile) {
-    toast.error('Please upload your Govt ID Proof (PAN, DL, etc)');
-    return;
-  }
-
-  if (!data.declaration) {
-    toast.error('Please accept the declaration');
-    return;
-  }
-
-  setIsSubmitting(true);
-
-  try {
-    // Convert files to base64
-    const resumeData = await fileToBase64(resumeFile);
-    const photoData = await fileToBase64(photoFile);
-    const govtIdProofData = await fileToBase64(govtIdProofFile);
-
-    const payload = {
-      ...data,
-      resumeData,
-      photoData,
-      govtIdProofData,
-    };
-
-    // ✅ Use the VITE_API_BASE_URL correctly
-    const API_BASE = import.meta.env.VITE_API_BASE_URL;
-    const response = await fetch(`${API_BASE}/api/registration`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
-
-    let result: { message?: string } = { message: '' };
+  // ---------------- Camera Handlers ----------------
+  const handleOpenCamera = async () => {
+    setCameraError(null);
     try {
-      result = await response.json();
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      setCameraStream(stream);
+      setShowCamera(true);
+      setTimeout(() => {
+        if (videoRef[0]) videoRef[0].srcObject = stream;
+      }, 100);
     } catch {
-      result = { message: 'Server returned non-JSON response' };
+      setCameraError('Unable to access camera. Please allow camera permissions.');
     }
-
-    setIsSubmitting(false);
-
-    if (response.ok) {
-      toast.success('Registration completed successfully!');
-      onSuccess();
-    } else {
-      toast.error(result.message || 'Registration failed');
-    }
-  } catch (error) {
-    console.error('Registration error:', error);
-    setIsSubmitting(false);
-    toast.error('Server error. Please try again later.');
-  }
-};
-  const fileToBase64 = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = error => reject(error);
-    });
   };
 
+  const handleCapturePhoto = () => {
+    if (!videoRef[0]) return;
+    const canvas = document.createElement('canvas');
+    canvas.width = videoRef[0].videoWidth;
+    canvas.height = videoRef[0].videoHeight;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    ctx.drawImage(videoRef[0], 0, 0, canvas.width, canvas.height);
+    canvas.toBlob(blob => {
+      if (!blob) return;
+      const file = new File([blob], 'captured_photo.png', { type: 'image/png' });
+      setPhotoFile(file);
+      toast.success('Photo captured successfully');
+      setShowCamera(false);
+      cameraStream?.getTracks().forEach(track => track.stop());
+    }, 'image/png');
+  };
+
+  const handleCloseCamera = () => {
+    setShowCamera(false);
+    cameraStream?.getTracks().forEach(track => track.stop());
+  };
+
+  // ---------------- File to Base64 ----------------
+  const fileToBase64 = (file: File): Promise<string> => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = error => reject(error);
+  });
+
+  // ---------------- Form Submit ----------------
+  const onSubmit = async (data: RegistrationFormData) => {
+    if (!otpVerified) return toast.error('Please verify your mobile number first');
+    if (!resumeFile) return toast.error('Please upload your resume');
+    if (!photoFile) return toast.error('Please upload your photo');
+    if (!govtIdProofFile) return toast.error('Please upload your Govt ID Proof (PAN, DL, etc)');
+    if (!data.declaration) return toast.error('Please accept the declaration');
+
+    setIsSubmitting(true);
+
+    try {
+      const [resumeData, photoData, govtIdProofData] = await Promise.all([
+        fileToBase64(resumeFile),
+        fileToBase64(photoFile),
+        fileToBase64(govtIdProofFile),
+      ]);
+
+      const payload = { ...data, resumeData, photoData, govtIdProofData };
+
+      const API_BASE = import.meta.env.VITE_API_BASE_URL.replace(/\/$/, '');
+      const response = await fetch(`${API_BASE}/registration`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      let result: { message?: string } = { message: '' };
+      try { result = await response.json(); } catch { result = { message: 'Server returned non-JSON response' }; }
+
+      if (response.ok) {
+        toast.success('Registration completed successfully!');
+        onSuccess();
+        setResumeFile(null);
+        setPhotoFile(null);
+        setGovtIdProofFile(null);
+      } else {
+        toast.error(result.message || 'Registration failed');
+      }
+    } catch (error) {
+      console.error('Registration error:', error);
+      toast.error('Server error. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       {/* Personal Details */}
