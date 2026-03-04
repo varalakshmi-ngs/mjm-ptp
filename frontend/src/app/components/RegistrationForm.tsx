@@ -37,7 +37,7 @@ interface RegistrationFormProps {
 }
 
 export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
-  const [govtIdProofFile, setGovtIdProofFile] = useState<File | null>(null);
+  // ...existing code...
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [photoFile, setPhotoFile] = useState<File | null>(null);
   const [otpSent, setOtpSent] = useState(false);
@@ -120,14 +120,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
     toast.success('Photo uploaded successfully');
   };
 
-  const handleGovtIdProofChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    if (!file.type.startsWith('image/')) return toast.error('Please upload an image file for Govt ID Proof');
-    if (file.size > 2 * 1024 * 1024) return toast.error('Govt ID Proof image size should be less than 2MB');
-    setGovtIdProofFile(file);
-    toast.success('Govt ID Proof uploaded successfully');
-  };
+  // ...existing code...
 
   // ---------------- Camera Handlers ----------------
   const handleOpenCamera = async () => {
@@ -180,19 +173,17 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
     if (!otpVerified) return toast.error('Please verify your mobile number first');
     if (!resumeFile) return toast.error('Please upload your resume');
     if (!photoFile) return toast.error('Please upload your photo');
-    if (!govtIdProofFile) return toast.error('Please upload your Govt ID Proof (PAN, DL, etc)');
     if (!data.declaration) return toast.error('Please accept the declaration');
 
     setIsSubmitting(true);
 
     try {
-      const [resumeData, photoData, govtIdProofData] = await Promise.all([
+      const [resumeData, photoData] = await Promise.all([
         fileToBase64(resumeFile),
         fileToBase64(photoFile),
-        fileToBase64(govtIdProofFile),
       ]);
 
-      const payload = { ...data, resumeData, photoData, govtIdProofData };
+      const payload = { ...data, resumeData, photoData };
 
       const API_BASE = import.meta.env.VITE_API_BASE_URL.replace(/\/$/, '');
       const response = await fetch(`${API_BASE}/registration`, {
@@ -209,7 +200,6 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
         onSuccess();
         setResumeFile(null);
         setPhotoFile(null);
-        setGovtIdProofFile(null);
       } else {
         toast.error(result.message || 'Registration failed');
       }
@@ -535,7 +525,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
             <FileText className="h-5 w-5" />
             Document Upload
           </CardTitle>
-          <CardDescription>Upload your resume, photograph, and Govt ID proof</CardDescription>
+          <CardDescription>Upload your resume and photograph</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
@@ -597,24 +587,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
             )}
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="govtIdProof">Govt ID Proof (PAN, DL, etc, max 2MB) *</Label>
-            <div className="flex items-center gap-4">
-              <Input
-                id="govtIdProof"
-                type="file"
-                accept="image/*"
-                onChange={handleGovtIdProofChange}
-                className="cursor-pointer"
-              />
-              {govtIdProofFile && (
-                <span className="text-sm text-green-600 flex items-center gap-1">
-                  <CheckCircle className="h-4 w-4" />
-                  {govtIdProofFile.name}
-                </span>
-              )}
-            </div>
-          </div>
+          {/* Govt ID Proof upload removed */}
         </CardContent>
       </Card>
 

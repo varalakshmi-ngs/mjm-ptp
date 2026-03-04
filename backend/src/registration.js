@@ -62,7 +62,6 @@ router.post(
       preferredLocation,
       resumeData,
       photoData,
-      govtIdProofData,
     } = req.body;
 
     try {
@@ -82,21 +81,15 @@ router.post(
       // Convert files safely
       const resumeBuffer = getBuffer(resumeData);
       const photoBuffer = getBuffer(photoData);
-      const govtIdBuffer = getBuffer(govtIdProofData);
-
-      console.log('Files present:', {
-        resume: !!resumeBuffer,
-        photo: !!photoBuffer,
-        govtIdProof: !!govtIdBuffer,
-      });
+      // Govt ID Proof removed
 
       // Insert candidate
       await pool.query(
         `INSERT INTO candidates (
           full_name, father_name, date_of_birth, gender, mobile, email, aadhaar,
           qualification, specialization, year_of_passing, percentage, applying_for,
-          experience, skills, preferred_location, resume, photo, govt_id_proof
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          experience, skills, preferred_location, resume, photo
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           fullName,
           fatherName,
@@ -115,7 +108,6 @@ router.post(
           preferredLocation,
           resumeBuffer,
           photoBuffer,
-          govtIdBuffer,
         ]
       );
 

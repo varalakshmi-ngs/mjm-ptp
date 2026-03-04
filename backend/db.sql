@@ -18,6 +18,5 @@ CREATE TABLE candidates (
     preferred_location VARCHAR(100) NOT NULL,
     resume LONGBLOB NOT NULL,
     photo LONGBLOB NOT NULL,
-    govt_id_proof LONGBLOB,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
