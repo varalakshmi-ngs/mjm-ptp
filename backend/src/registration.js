@@ -6,8 +6,13 @@ const router = express.Router();
 
 // Helper to safely convert base64 to Buffer
 const getBuffer = (data) => {
-  if (!data || !data.includes(',')) return null;
-  return Buffer.from(data.split(',')[1], 'base64');
+  if (!data || typeof data !== 'string' || !data.includes(',')) return null;
+  try {
+    return Buffer.from(data.split(',')[1], 'base64');
+  } catch (err) {
+    console.error('Base64 conversion error:', err);
+    return null;
+  }
 };
 
 // Registration endpoint
@@ -28,13 +33,10 @@ router.post(
     body('experience').isIn(['Fresher', 'Experienced']),
     body('skills').notEmpty(),
     body('preferredLocation').notEmpty(),
-    body('resumeData').notEmpty(),
-    body('photoData').notEmpty(),
-    body('govtIdProofData').notEmpty(),
     body('declaration').isBoolean().equals('true'),
   ],
   async (req, res) => {
-    console.log('Incoming registration data:', req.body); // <-- Debugging log
+    console.log('Incoming registration data:', req.body);
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -68,11 +70,19 @@ router.post(
         'SELECT id FROM candidates WHERE email = ? OR mobile = ?',
         [email, mobile]
       );
+
       if (existing.length > 0) {
-        return res
-          .status(409)
-          .json({ message: 'Email or mobile already registered' });
+        return res.status(409).json({
+          message: 'Email or mobile already registered',
+        });
       }
+
+      // Log which files are being inserted
+      console.log('Files present:',
+        'resume:', !!resumeData,
+        'photo:', !!photoData,
+        'govtIdProof:', !!govtIdProofData
+      );
 
       // Insert into DB safely
       await pool.query(
@@ -105,8 +115,8 @@ router.post(
 
       res.status(201).json({ message: 'Registration successful' });
     } catch (err) {
-      console.error('Registration error:', err); // <-- Logs actual DB errors
-      res.status(500).json({ message: 'Server error' });
+      console.error('Registration DB error:', err.sqlMessage || err);
+      res.status(500).json({ message: 'Server error', error: err.message });
     }
   }
 );
