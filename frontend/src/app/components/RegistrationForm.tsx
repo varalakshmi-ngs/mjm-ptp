@@ -37,69 +37,69 @@ interface RegistrationFormProps {
 }
 
 export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
-      // Govt ID Proof state
-      const [govtIdProofFile, setGovtIdProofFile] = useState<File | null>(null);
+  // Govt ID Proof state
+  const [govtIdProofFile, setGovtIdProofFile] = useState<File | null>(null);
 
-      const handleGovtIdProofChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (file) {
-          if (!file.type.startsWith('image/')) {
-            toast.error('Please upload an image file for Govt ID Proof');
-            return;
-          }
-          if (file.size > 2 * 1024 * 1024) {
-            toast.error('Govt ID Proof image size should be less than 2MB');
-            return;
-          }
-          setGovtIdProofFile(file);
-          toast.success('Govt ID Proof uploaded successfully');
+  const handleGovtIdProofChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (!file.type.startsWith('image/')) {
+        toast.error('Please upload an image file for Govt ID Proof');
+        return;
+      }
+      if (file.size > 2 * 1024 * 1024) {
+        toast.error('Govt ID Proof image size should be less than 2MB');
+        return;
+      }
+      setGovtIdProofFile(file);
+      toast.success('Govt ID Proof uploaded successfully');
+    }
+  };
+  // Camera capture state
+  const [showCamera, setShowCamera] = useState(false);
+  const [cameraStream, setCameraStream] = useState<MediaStream | null>(null);
+  const [cameraError, setCameraError] = useState<string | null>(null);
+  const videoRef = useState<HTMLVideoElement | null>(null);
+
+  // Camera capture handler
+  const handleOpenCamera = async () => {
+    setCameraError(null);
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      setCameraStream(stream);
+      setShowCamera(true);
+      setTimeout(() => {
+        if (videoRef[0]) videoRef[0].srcObject = stream;
+      }, 100);
+    } catch (err) {
+      setCameraError('Unable to access camera. Please allow camera permissions.');
+    }
+  };
+
+  const handleCapturePhoto = () => {
+    if (!videoRef[0]) return;
+    const canvas = document.createElement('canvas');
+    canvas.width = videoRef[0].videoWidth;
+    canvas.height = videoRef[0].videoHeight;
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      ctx.drawImage(videoRef[0], 0, 0, canvas.width, canvas.height);
+      canvas.toBlob(blob => {
+        if (blob) {
+          const file = new File([blob], 'captured_photo.png', { type: 'image/png' });
+          setPhotoFile(file);
+          toast.success('Photo captured successfully');
+          setShowCamera(false);
+          if (cameraStream) cameraStream.getTracks().forEach(track => track.stop());
         }
-      };
-    // Camera capture state
-    const [showCamera, setShowCamera] = useState(false);
-    const [cameraStream, setCameraStream] = useState<MediaStream | null>(null);
-    const [cameraError, setCameraError] = useState<string | null>(null);
-    const videoRef = useState<HTMLVideoElement | null>(null);
+      }, 'image/png');
+    }
+  };
 
-    // Camera capture handler
-    const handleOpenCamera = async () => {
-      setCameraError(null);
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        setCameraStream(stream);
-        setShowCamera(true);
-        setTimeout(() => {
-          if (videoRef[0]) videoRef[0].srcObject = stream;
-        }, 100);
-      } catch (err) {
-        setCameraError('Unable to access camera. Please allow camera permissions.');
-      }
-    };
-
-    const handleCapturePhoto = () => {
-      if (!videoRef[0]) return;
-      const canvas = document.createElement('canvas');
-      canvas.width = videoRef[0].videoWidth;
-      canvas.height = videoRef[0].videoHeight;
-      const ctx = canvas.getContext('2d');
-      if (ctx) {
-        ctx.drawImage(videoRef[0], 0, 0, canvas.width, canvas.height);
-        canvas.toBlob(blob => {
-          if (blob) {
-            const file = new File([blob], 'captured_photo.png', { type: 'image/png' });
-            setPhotoFile(file);
-            toast.success('Photo captured successfully');
-            setShowCamera(false);
-            if (cameraStream) cameraStream.getTracks().forEach(track => track.stop());
-          }
-        }, 'image/png');
-      }
-    };
-
-    const handleCloseCamera = () => {
-      setShowCamera(false);
-      if (cameraStream) cameraStream.getTracks().forEach(track => track.stop());
-    };
+  const handleCloseCamera = () => {
+    setShowCamera(false);
+    if (cameraStream) cameraStream.getTracks().forEach(track => track.stop());
+  };
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [photoFile, setPhotoFile] = useState<File | null>(null);
@@ -231,7 +231,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
         govtIdProofData,
       };
 
-      const response = await fetch(`https://jobmela.sdvvl.com/registration`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/registration`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -622,7 +622,15 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
             </div>
             {showCamera && (
               <div className="mt-4 flex flex-col items-center gap-2">
-                <video ref={el => (videoRef[0] = el)} autoPlay playsInline className="rounded-lg border w-64 h-48 object-cover" />
+                {/* <video ref={el => (videoRef[0] = el)} autoPlay playsInline className="rounded-lg border w-64 h-48 object-cover" /> */}
+                <video
+                  ref={(el) => {
+                    videoRef[0] = el;
+                  }}
+                  autoPlay
+                  playsInline
+                  className="rounded-lg border w-64 h-48 object-cover"
+                />
                 <div className="flex gap-2 mt-2">
                   <Button type="button" onClick={handleCapturePhoto} variant="default">Take Photo</Button>
                   <Button type="button" onClick={handleCloseCamera} variant="outline">Cancel</Button>

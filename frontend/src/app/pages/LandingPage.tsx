@@ -148,7 +148,7 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             {/* First part: major companies (25% width) */}
             <div className=' mt-[250px]'>
-              <div className="flex flex-col items-center justify-center bg-white rounded-xl shadow-lg border-2 border-amber-400 px-8 py-10 h-[500px] mb-[150px]">
+              <div className="flex flex-col items-center justify-center bg-white rounded-xl shadow-lg border-2 border-amber-400 px-8 py-10 h-[600px] mb-[150px]">
                 {/* <img src="/logos/sdvvl.png" alt="SDVVL logo" className="h-20 w-auto mb-4 object-contain" /> */}
                 <div className="flex flex-col items-center gap-2">
                   <img src="/logos/sdvvl.png" alt="SDVVL logo" />

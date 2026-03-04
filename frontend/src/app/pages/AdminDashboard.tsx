@@ -39,32 +39,32 @@ export default function AdminDashboard() {
   });
 
   const exportToCSV = () => {
-  const headers = [
-    "ID",
-    "Full Name",
-    "Email",
-    "Mobile",
-    "Qualification",
-    "Applying For",
-    "Experience",
-    "Registered On"
-  ];
+    const headers = [
+      "ID",
+      "Full Name",
+      "Email",
+      "Mobile",
+      "Qualification",
+      "Applying For",
+      "Experience",
+      "Registered On"
+    ];
 
-  const rows = filteredCandidates.map((c: Candidate) => [
-    c.id,
-    c.fullName,
-    c.email,
-    c.mobile,
-    c.qualification,
-    c.applyingFor,
-    c.experience,
-    new Date(c.createdAt).toLocaleDateString()
-  ]);
+    const rows = filteredCandidates.map((c: Candidate) => [
+      c.id,
+      c.fullName,
+      c.email,
+      c.mobile,
+      c.qualification,
+      c.applyingFor,
+      c.experience,
+      new Date(c.createdAt).toLocaleDateString()
+    ]);
 
-  return [headers, ...rows]
-    .map(row => row.join(","))
-    .join("\n");
-};
+    return [headers, ...rows]
+      .map(row => row.join(","))
+      .join("\n");
+  };
 
   useEffect(() => {
     // Check if admin is logged in
@@ -81,42 +81,16 @@ export default function AdminDashboard() {
   }, [searchQuery, filterJobType, filterExperience, candidates]);
 
   const fetchCandidates = async () => {
-  try {
-    const response = await fetch(
-      "https://jobmela.sdvvl.com/api/registration/candidates"
-    );
-
-    const result = await response.json();
-
-    if (!response.ok) {
-      throw new Error(result.message || "Failed to fetch candidates");
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/registration/candidates`);
+      const data = await response.json();
+      setCandidates(data);
+      setFilteredCandidates(data);
+      setStats(computeStats(data));
+    } catch (error) {
+      toast.error('Failed to fetch candidates');
     }
-
-    const data = Array.isArray(result) ? result : result.data || [];
-
-    setCandidates(data);
-    setFilteredCandidates(data);
-    setStats(computeStats(data));
-
-  } catch (error) {
-    console.error(error);
-    toast.error("Failed to fetch candidates");
-    setCandidates([]);
-    setFilteredCandidates([]);
-  }
-};
-
-  // const fetchCandidates = async () => {
-  //   try {
-      // const response = await fetch(`https://jobmela.sdvvl.com/registration/candidates`);
-      // const data = await response.json();
-      // setCandidates(data);
-      // setFilteredCandidates(data);
-      // setStats(computeStats(data));
-  //   } catch (error) {
-  //     toast.error('Failed to fetch candidates');
-  //   }
-  // };
+  };
 
   // const applyFilters = () => {
   //   let filtered = candidates;
@@ -186,16 +160,23 @@ export default function AdminDashboard() {
     setIsDetailsOpen(true);
   };
 
+  // const handleDownloadResume = (candidate: Candidate) => {
+  //   if (candidate.resumeData) {
+  //     const link = document.createElement('a');
+  //     link.href = candidate.resumeData;
+  //     link.download = `${candidate.fullName}_Resume.pdf`;
+  //     link.click();
+  //     toast.success('Resume downloaded successfully');
+  //   } else {
+  //     toast.error('Resume not available');
+  //   }
+  // };
+
   const handleDownloadResume = (candidate: Candidate) => {
-    if (candidate.resumeData) {
-      const link = document.createElement('a');
-      link.href = candidate.resumeData;
-      link.download = `${candidate.fullName}_Resume.pdf`;
-      link.click();
-      toast.success('Resume downloaded successfully');
-    } else {
-      toast.error('Resume not available');
-    }
+    window.open(
+      `${import.meta.env.VITE_API_BASE_URL}/api/registration/download/${candidate.id}/resume`,
+      "_blank"
+    );
   };
 
   const handleExportToExcel = () => {
@@ -545,8 +526,21 @@ export default function AdminDashboard() {
                     <Download className="h-4 w-4" />
                     Download Resume
                   </Button>
-                  {selectedCandidate.photoData && (
-                    <Button variant="outline" className="gap-2">
+                  {selectedCandidate.id && (
+                    // <Button variant="outline" className="gap-2">
+                    //   <Eye className="h-4 w-4" />
+                    //   View Photo
+                    // </Button>
+                    <Button
+                      variant="outline"
+                      className="gap-2"
+                      onClick={() =>
+                        window.open(
+                          `${import.meta.env.VITE_API_BASE_URL}/api/registration/download/${selectedCandidate.id}/photo`,
+                          "_blank"
+                        )
+                      }
+                    >
                       <Eye className="h-4 w-4" />
                       View Photo
                     </Button>
