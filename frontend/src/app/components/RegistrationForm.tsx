@@ -231,7 +231,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
         govtIdProofData,
       };
 
-      const response = await fetch('https://jobmela.sdvvl.com/api/registration/, {
+      const response = await fetch('https://jobmela.sdvvl.com/api/registration/', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
