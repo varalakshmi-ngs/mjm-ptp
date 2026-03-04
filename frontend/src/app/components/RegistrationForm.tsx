@@ -253,15 +253,24 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
   //     toast.error("Server error. Please try again later.");
   //   }
   // };
-
-  const onSubmit = async (data: RegistrationFormData) => {
+const onSubmit = async (data: RegistrationFormData) => {
   if (!otpVerified) {
     toast.error('Please verify your mobile number first');
     return;
   }
 
-  if (!resumeFile || !photoFile || !govtIdProofFile) {
-    toast.error('Please upload all required files (Resume, Photo, Govt ID Proof)');
+  if (!resumeFile) {
+    toast.error('Please upload your resume');
+    return;
+  }
+
+  if (!photoFile) {
+    toast.error('Please upload your photo');
+    return;
+  }
+
+  if (!govtIdProofFile) {
+    toast.error('Please upload your Govt ID Proof (PAN, DL, etc)');
     return;
   }
 
@@ -273,46 +282,45 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
   setIsSubmitting(true);
 
   try {
-    // Convert files to Base64
+    // Convert files to base64
     const resumeData = await fileToBase64(resumeFile);
     const photoData = await fileToBase64(photoFile);
     const govtIdProofData = await fileToBase64(govtIdProofFile);
 
-    // Prepare payload with proper types
     const payload = {
       ...data,
-      yearOfPassing: Number(data.yearOfPassing), // backend expects integer
-      declaration: Boolean(data.declaration),   // ensure boolean
       resumeData,
       photoData,
       govtIdProofData,
     };
 
-    // Use env variable for base URL
+    // ✅ Use the VITE_API_BASE_URL correctly
     const API_BASE = import.meta.env.VITE_API_BASE_URL;
-
     const response = await fetch(`${API_BASE}/api/registration`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     });
 
-    const result = await response.json();
+    let result: { message?: string } = { message: '' };
+    try {
+      result = await response.json();
+    } catch {
+      result = { message: 'Server returned non-JSON response' };
+    }
+
+    setIsSubmitting(false);
 
     if (response.ok) {
-      toast.success("Registration completed successfully!");
+      toast.success('Registration completed successfully!');
       onSuccess();
     } else {
-      // Handle duplicate or validation errors from backend
-      toast.error(result.message || "Registration failed");
+      toast.error(result.message || 'Registration failed');
     }
-  } catch (error: any) {
+  } catch (error) {
     console.error('Registration error:', error);
-    toast.error("Server error. Please try again later.");
-  } finally {
     setIsSubmitting(false);
+    toast.error('Server error. Please try again later.');
   }
 };
   const fileToBase64 = (file: File): Promise<string> => {
