@@ -130,7 +130,7 @@ router.get('/candidates', async (req, res) => {
       `SELECT 
          id, full_name, father_name, date_of_birth, gender, mobile, email,
          aadhaar, qualification, specialization, year_of_passing, percentage,
-         applying_for, experience, skills, preferred_location, created_at, govt_id_proof
+         applying_for, experience, skills, preferred_location, created_at
        FROM candidates
        ORDER BY created_at DESC`
     );
