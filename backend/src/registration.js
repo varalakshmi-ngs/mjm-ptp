@@ -19,22 +19,22 @@ const getBuffer = (data) => {
 router.post(
   '/',
   [
-    body('fullName').isLength({ min: 1 }).trim(),
-    body('fatherName').isLength({ min: 1 }).trim(),
-    body('dateOfBirth').isISO8601(),
-    body('gender').isIn(['Male', 'Female', 'Other']),
-    body('mobile').isLength({ min: 10, max: 10 }).isNumeric(),
-    body('email').isEmail(),
-    body('qualification').notEmpty(),
-    body('specialization').notEmpty(),
-    body('yearOfPassing').isInt({ min: 1990, max: 2026 }),
-    body('percentage').notEmpty(),
-    body('applyingFor').notEmpty(),
-    body('experience').isIn(['Fresher', 'Experienced']),
-    body('skills').notEmpty(),
-    body('preferredLocation').notEmpty(),
-    body('declaration').isBoolean().equals('true'),
-  ],
+  body('fullName').isLength({ min: 1 }).trim(),
+  body('fatherName').isLength({ min: 1 }).trim(),
+  body('dateOfBirth').isISO8601(),
+  body('gender').isIn(['Male', 'Female', 'Other']),
+  body('mobile').isLength({ min: 10, max: 10 }).isNumeric(),
+  body('email').isEmail(),
+  body('qualification').notEmpty(),
+  body('specialization').notEmpty(),
+  body('yearOfPassing').isInt({ min: 1990, max: 2026 }),
+  body('percentage').notEmpty(),
+  body('applyingFor').notEmpty(),
+  body('experience').isIn(['Fresher', 'Experienced']),
+  body('skills').notEmpty(),
+  body('preferredLocation').notEmpty(),
+  body('declaration').isBoolean()   // ✅ fixed
+],
   async (req, res) => {
     console.log('Incoming registration payload:', req.body);
 
