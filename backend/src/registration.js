@@ -36,10 +36,11 @@ router.post(
     body('declaration').isBoolean().equals('true'),
   ],
   async (req, res) => {
-    console.log('Incoming registration data:', req.body);
+    console.log('Incoming registration payload:', req.body);
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      console.log('Validation errors:', errors.array());
       return res.status(400).json({ errors: errors.array() });
     }
 
@@ -72,19 +73,24 @@ router.post(
       );
 
       if (existing.length > 0) {
+        console.log('Duplicate email or mobile:', email, mobile);
         return res.status(409).json({
           message: 'Email or mobile already registered',
         });
       }
 
-      // Log which files are being inserted
-      console.log('Files present:',
-        'resume:', !!resumeData,
-        'photo:', !!photoData,
-        'govtIdProof:', !!govtIdProofData
-      );
+      // Convert files safely
+      const resumeBuffer = getBuffer(resumeData);
+      const photoBuffer = getBuffer(photoData);
+      const govtIdBuffer = getBuffer(govtIdProofData);
 
-      // Insert into DB safely
+      console.log('Files present:', {
+        resume: !!resumeBuffer,
+        photo: !!photoBuffer,
+        govtIdProof: !!govtIdBuffer,
+      });
+
+      // Insert candidate
       await pool.query(
         `INSERT INTO candidates (
           full_name, father_name, date_of_birth, gender, mobile, email, aadhaar,
@@ -107,16 +113,20 @@ router.post(
           experience,
           skills,
           preferredLocation,
-          getBuffer(resumeData),
-          getBuffer(photoData),
-          getBuffer(govtIdProofData),
+          resumeBuffer,
+          photoBuffer,
+          govtIdBuffer,
         ]
       );
 
+      console.log('Registration successful for:', email);
       res.status(201).json({ message: 'Registration successful' });
     } catch (err) {
       console.error('Registration DB error:', err.sqlMessage || err);
-      res.status(500).json({ message: 'Server error', error: err.message });
+      res.status(500).json({
+        message: 'Server error',
+        error: err.message || 'Unknown error',
+      });
     }
   }
 );
@@ -134,8 +144,8 @@ router.get('/candidates', async (req, res) => {
     );
     res.json(rows);
   } catch (err) {
-    console.error('Get candidates error:', err);
-    res.status(500).json({ message: 'Server error' });
+    console.error('Get candidates error:', err.sqlMessage || err);
+    res.status(500).json({ message: 'Server error', error: err.message });
   }
 });
 
