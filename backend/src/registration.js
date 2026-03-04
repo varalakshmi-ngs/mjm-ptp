@@ -4,6 +4,12 @@ import { body, validationResult } from 'express-validator';
 
 const router = express.Router();
 
+// Helper to safely convert base64 to Buffer
+const getBuffer = (data) => {
+  if (!data || !data.includes(',')) return null;
+  return Buffer.from(data.split(',')[1], 'base64');
+};
+
 // Registration endpoint
 router.post(
   '/',
@@ -28,10 +34,13 @@ router.post(
     body('declaration').isBoolean().equals('true'),
   ],
   async (req, res) => {
+    console.log('Incoming registration data:', req.body); // <-- Debugging log
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
+
     const {
       fullName,
       fatherName,
@@ -52,17 +61,25 @@ router.post(
       photoData,
       govtIdProofData,
     } = req.body;
+
     try {
+      // Check if email or mobile already exists
       const [existing] = await pool.query(
         'SELECT id FROM candidates WHERE email = ? OR mobile = ?',
         [email, mobile]
       );
       if (existing.length > 0) {
-        return res.status(409).json({ message: 'Email or mobile already registered' });
+        return res
+          .status(409)
+          .json({ message: 'Email or mobile already registered' });
       }
+
+      // Insert into DB safely
       await pool.query(
         `INSERT INTO candidates (
-          full_name, father_name, date_of_birth, gender, mobile, email, aadhaar, qualification, specialization, year_of_passing, percentage, applying_for, experience, skills, preferred_location, resume, photo, govt_id_proof
+          full_name, father_name, date_of_birth, gender, mobile, email, aadhaar,
+          qualification, specialization, year_of_passing, percentage, applying_for,
+          experience, skills, preferred_location, resume, photo, govt_id_proof
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           fullName,
@@ -80,35 +97,34 @@ router.post(
           experience,
           skills,
           preferredLocation,
-          Buffer.from(resumeData.split(',')[1], 'base64'),
-          Buffer.from(photoData.split(',')[1], 'base64'),
-          Buffer.from(govtIdProofData.split(',')[1], 'base64'),
+          getBuffer(resumeData),
+          getBuffer(photoData),
+          getBuffer(govtIdProofData),
         ]
       );
+
       res.status(201).json({ message: 'Registration successful' });
     } catch (err) {
-      console.error(err);
+      console.error('Registration error:', err); // <-- Logs actual DB errors
       res.status(500).json({ message: 'Server error' });
     }
   }
 );
 
 // Admin: Get all candidates
-// router.get('/candidates', async (req, res) => {
-//   try {
-//     const [rows] = await pool.query('SELECT id, full_name, father_name, date_of_birth, gender, mobile, email, aadhaar, qualification, specialization, year_of_passing, percentage, applying_for, experience, skills, preferred_location, created_at, govt_id_proof FROM candidates ORDER BY created_at DESC');
-//     res.json(rows);
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ message: 'Server error' });
-//   }
-// });
 router.get('/candidates', async (req, res) => {
   try {
-    const [rows] = await pool.query('SELECT id, full_name, father_name, date_of_birth, gender, mobile, email, aadhaar, qualification, specialization, year_of_passing, percentage, applying_for, experience, skills, preferred_location, created_at, govt_id_proof FROM candidates ORDER BY created_at DESC');
+    const [rows] = await pool.query(
+      `SELECT 
+         id, full_name, father_name, date_of_birth, gender, mobile, email,
+         aadhaar, qualification, specialization, year_of_passing, percentage,
+         applying_for, experience, skills, preferred_location, created_at, govt_id_proof
+       FROM candidates
+       ORDER BY created_at DESC`
+    );
     res.json(rows);
   } catch (err) {
-    console.error(err);
+    console.error('Get candidates error:', err);
     res.status(500).json({ message: 'Server error' });
   }
 });
