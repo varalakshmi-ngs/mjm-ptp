@@ -144,7 +144,7 @@ export default function LandingPage() {
       {/* Companies Section */}
       <section id="companies" className="py-12 bg-amber-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-center text-4xl font-bold mb-8">Our Companies</h2>
+          <h2 className="text-center text-4xl font-bold mb-8">Participating Companies</h2>
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             {/* First part: major companies (25% width) */}
             <div className=' mt-[250px]'>
