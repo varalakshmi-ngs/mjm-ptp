@@ -28,7 +28,7 @@ export default function LandingPage() {
             <nav className="hidden md:flex items-center gap-6 cursor-pointer">
               <a href="#home" className="text-gray-700 hover:text-blue-600 font-medium">Home</a>
               <a href="#about" className="text-gray-700 hover:text-blue-600 font-medium">About</a>
-              <a href="#companies" className="text-gray-700 hover:text-blue-600 font-medium">Our Companies</a>
+              <a href="#companies" className="text-gray-700 hover:text-blue-600 font-medium">Companies</a>
               <a href="#event-details" className="text-gray-700 hover:text-blue-600 font-medium">Event Details</a>
               <button
                 onClick={() => navigate('/register')}
@@ -279,7 +279,7 @@ export default function LandingPage() {
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-blue-600 font-bold">✓</span>
-                      <span className="text-gray-700">Original educational certificates</span>
+                      <span className="text-gray-700">Educational certificates</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-blue-600 font-bold">✓</span>
