@@ -563,7 +563,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="photo">Passport Size Photo (max 500KB) *</Label>
+            <Label htmlFor="photo">Passport Size Photo (max 2MB) *</Label>
             <div className="flex items-center gap-4">
               <Input
                 id="photo"
