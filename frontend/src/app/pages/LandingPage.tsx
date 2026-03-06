@@ -204,9 +204,12 @@ export default function LandingPage() {
                   { name: "Bright Path Education Services", logo: "/logos/bright-path.jpg" },
                   { name: "Makers Mind", logo: "logos/makersmind.jpg" },
                   { name: "Golden Manpower Consultants(Dubai)", logo: "/logos/golden.jpg" },
-                  { name:"Aashvee Tech Solutions Pvt. Ltd.", logo:"/logos/aashvee.png"},
-                  { name:"Cognito Insights Solutions Pvt. Ltd", logo:"/logos/cognito.png"},
-                  { name:"Phonpe",logo:"/logos/phonpe.png"}
+                  { name: "Aashvee Tech Solutions Pvt. Ltd.", logo: "/logos/aashvee.png" },
+                  { name: "Cognito Insights Solutions Pvt. Ltd", logo: "/logos/cognito.png" },
+                  { name: "Phonpe", logo: "/logos/phonpe.png" },
+                  { name: "HSN TECH SOLUTION PVT LTD",logo:"/logos/HSN.webp"},
+                  { name: "AIL Dixon Technologies Private Limited",logo:"/logos/dixon.png"},
+                  { name: "Premier Energies", logo:"/logos/premier.png"}
                 ]
                   .filter((_, idx) => idx % 3 === colIdx)
                   .map((company, idx) => (

@@ -19,22 +19,22 @@ const getBuffer = (data) => {
 router.post(
   '/',
   [
-  body('fullName').isLength({ min: 1 }).trim(),
-  body('fatherName').isLength({ min: 1 }).trim(),
-  body('dateOfBirth').isISO8601(),
-  body('gender').isIn(['Male', 'Female', 'Other']),
-  body('mobile').isLength({ min: 10, max: 10 }).isNumeric(),
-  body('email').isEmail(),
-  body('qualification').notEmpty(),
-  body('specialization').notEmpty(),
-  body('yearOfPassing').isInt({ min: 1990, max: 2026 }),
-  body('percentage').notEmpty(),
-  body('applyingFor').notEmpty(),
-  body('experience').isIn(['Fresher', 'Experienced']),
-  body('skills').notEmpty(),
-  body('preferredLocation').notEmpty(),
-  body('declaration').isBoolean()   // ✅ fixed
-],
+    body('fullName').isLength({ min: 1 }).trim(),
+    body('fatherName').isLength({ min: 1 }).trim(),
+    body('dateOfBirth').isISO8601(),
+    body('gender').isIn(['Male', 'Female', 'Other']),
+    body('mobile').isLength({ min: 10, max: 10 }).isNumeric(),
+    body('email').isEmail(),
+    body('qualification').notEmpty(),
+    body('specialization').notEmpty(),
+    body('yearOfPassing').isInt({ min: 1990, max: 2026 }),
+    body('percentage').notEmpty(),
+    body('applyingFor').notEmpty(),
+    body('experience').isIn(['Fresher', 'Experienced']),
+    body('skills').notEmpty(),
+    body('preferredLocation').notEmpty(),
+    body('declaration').isBoolean()   // ✅ fixed
+  ],
   async (req, res) => {
     console.log('Incoming registration payload:', req.body);
 
@@ -177,5 +177,58 @@ router.get('/candidates', async (req, res) => {
     res.status(500).json({ message: 'Server error', error: err.message });
   }
 });
+
+// resume downloading
+router.get('/download/:id/resume', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const [rows] = await pool.query(
+      "SELECT resume FROM candidates WHERE id = ?",
+      [id]
+    );
+
+    if (!rows.length || !rows[0].resume) {
+      return res.status(404).json({ message: "Resume not found" });
+    }
+
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader(
+      "Content-Disposition",
+      `attachment; filename=resume_${id}.pdf`
+    );
+
+    res.send(rows[0].resume);
+
+  } catch (err) {
+    console.error("Resume download error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
+// photo
+router.get('/download/:id/photo', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const [rows] = await pool.query(
+      "SELECT photo FROM candidates WHERE id = ?",
+      [id]
+    );
+
+    if (!rows.length || !rows[0].photo) {
+      return res.status(404).json({ message: "Photo not found" });
+    }
+
+    res.setHeader("Content-Type", "image/jpeg");
+    res.send(rows[0].photo);
+
+  } catch (err) {
+    console.error("Photo download error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 
 export default router;
