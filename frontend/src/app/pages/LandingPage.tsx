@@ -176,7 +176,6 @@ export default function LandingPage() {
             {Array.from({ length: 3 }).map((_, colIdx) => (
               <div key={colIdx} className="flex flex-col gap-6">
                 {[
-                  // { name: "NUHVIN GLOBAL SERVICES PVT LTD", logo: null },
                   { name: "PINK MOON TECHNOLOGIES PVT LTD", logo: "/logos/pinkmoon.png" },
                   { name: "SRAM SOLUTIONS PVT LTD", logo: "/logos/sram.png" },
                   { name: "FLYEX-CARGO", logo: "/logos/flyex.png" },
@@ -204,7 +203,10 @@ export default function LandingPage() {
                   { name: "Trident One Associates", logo: "/logos/trident.jpg" },
                   { name: "Bright Path Education Services", logo: "/logos/bright-path.jpg" },
                   { name: "Makers Mind", logo: "logos/makersmind.jpg" },
-                  { name: "Golden Manpower Consultants(Dubai)", logo: "/logos/golden.jpg" }
+                  { name: "Golden Manpower Consultants(Dubai)", logo: "/logos/golden.jpg" },
+                  { name:"Aashvee Tech Solutions Pvt. Ltd.", logo:"/logos/aashvee.png"},
+                  { name:"Cognito Insights Solutions Pvt. Ltd", logo:"/logos/cognito.png"},
+                  { name:"Phonpe",logo:"/logos/phonpe.png"}
                 ]
                   .filter((_, idx) => idx % 3 === colIdx)
                   .map((company, idx) => (
