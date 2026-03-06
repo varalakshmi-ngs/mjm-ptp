@@ -529,7 +529,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="resume">Resume (PDF only, max 2MB) *</Label>
+            <Label htmlFor="resume">Resume (PDF,JPG,JPEG,PNG only, max 2MB) *</Label>
             <div className="flex items-center gap-4">
               <Input
                 id="resume"
