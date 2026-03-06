@@ -21,10 +21,6 @@ export default function AdminLoginPage() {
     initializeAdmin();
   }, []);
 
-  // Initialize admin credentials
-  // useState(() => {
-  //   initializeAdmin();
-  // });
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

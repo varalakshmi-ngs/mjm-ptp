@@ -19,6 +19,7 @@ import { Badge } from '../components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { toast } from 'sonner';
+import {DialogDescription} from "../components/ui/dialog";
 import {
   type Candidate
 } from '../utils/storage';
@@ -397,8 +398,16 @@ export default function AdminDashboard() {
       {/* Candidate Details Dialog */}
       <Dialog open={isDetailsOpen} onOpenChange={setIsDetailsOpen}>
         <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          {/* <DialogHeader>
+            <DialogTitle>Candidate Details</DialogTitle>
+          </DialogHeader> */}
+          
+
           <DialogHeader>
             <DialogTitle>Candidate Details</DialogTitle>
+            <DialogDescription>
+              Complete information about the selected candidate.
+            </DialogDescription>
           </DialogHeader>
           {selectedCandidate && (
             <div className="space-y-6">
