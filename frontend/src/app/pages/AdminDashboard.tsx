@@ -91,26 +91,6 @@ export default function AdminDashboard() {
       toast.error('Failed to fetch candidates');
     }
   };
-
-  // const applyFilters = () => {
-  //   let filtered = candidates;
-  //   if (searchQuery) {
-  //     const lowerQuery = searchQuery.toLowerCase();
-  //     filtered = filtered.filter(c =>
-  //       c.full_name.toLowerCase().includes(lowerQuery) ||
-  //       c.email.toLowerCase().includes(lowerQuery) ||
-  //       c.mobile.includes(searchQuery) ||
-  //       c.qualification.toLowerCase().includes(lowerQuery)
-  //     );
-  //   }
-  //   if (filterJobType !== 'all') {
-  //     filtered = filtered.filter(c => c.applying_for === filterJobType);
-  //   }
-  //   if (filterExperience !== 'all') {
-  //     filtered = filtered.filter(c => c.experience === filterExperience);
-  //   }
-  //   setFilteredCandidates(filtered);
-  // };
   const applyFilters = () => {
     let filtered = candidates;
 
@@ -161,20 +141,14 @@ export default function AdminDashboard() {
   };
 
   // const handleDownloadResume = (candidate: Candidate) => {
-  //   if (candidate.resumeData) {
-  //     const link = document.createElement('a');
-  //     link.href = candidate.resumeData;
-  //     link.download = `${candidate.fullName}_Resume.pdf`;
-  //     link.click();
-  //     toast.success('Resume downloaded successfully');
-  //   } else {
-  //     toast.error('Resume not available');
-  //   }
+  //   window.open(
+  //     `${import.meta.env.VITE_API_BASE_URL}/api/registration/download/${candidate.id}/resume`,
+  //     "_blank"
+  //   );
   // };
-
   const handleDownloadResume = (candidate: Candidate) => {
     window.open(
-      `${import.meta.env.VITE_API_BASE_URL}/api/registration/download/${candidate.id}/resume`,
+      `${import.meta.env.VITE_API_BASE_URL}/registration/download/${candidate.id}/resume`,
       "_blank"
     );
   };
@@ -536,7 +510,7 @@ export default function AdminDashboard() {
                       className="gap-2"
                       onClick={() =>
                         window.open(
-                          `${import.meta.env.VITE_API_BASE_URL}/api/registration/download/${selectedCandidate.id}/photo`,
+                          `${import.meta.env.VITE_API_BASE_URL}/registration/download/${selectedCandidate.id}/photo`,
                           "_blank"
                         )
                       }
