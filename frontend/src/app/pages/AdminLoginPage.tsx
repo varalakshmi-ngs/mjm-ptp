@@ -1,4 +1,5 @@
-import { useState } from 'react';
+// import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { Building2, Lock, User, ArrowLeft, Eye, EyeOff } from 'lucide-react';
 import { Button } from '../components/ui/button';
@@ -15,10 +16,15 @@ export default function AdminLoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  // Initialize admin credentials
-  useState(() => {
+
+  useEffect(() => {
     initializeAdmin();
-  });
+  }, []);
+
+  // Initialize admin credentials
+  // useState(() => {
+  //   initializeAdmin();
+  // });
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -115,7 +121,7 @@ export default function AdminLoginPage() {
               {isLoading ? 'Logging in...' : 'Login to Admin Panel'}
             </Button>
 
-           
+
           </form>
         </CardContent>
       </Card>

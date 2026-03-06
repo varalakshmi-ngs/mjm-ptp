@@ -23,46 +23,68 @@ export interface Candidate {
 }
 
 const STORAGE_KEY = 'sdvvl_candidates';
+
+// const ADMIN_KEY = 'sdvvl_admin';
+
+// // Initialize admin credentials (username: admin, password: admin123)
+// export const initializeAdmin = () => {
+//   if (!localStorage.getItem(ADMIN_KEY)) {
+//     localStorage.setItem(ADMIN_KEY, JSON.stringify({
+//       username: 'admin',
+//       password: 'sdvvl@JM26' // In production, this should be hashed
+//     }));
+//   }
+// };
+
+// export const validateAdmin = (username: string, password: string): boolean => {
+//   const adminData = localStorage.getItem(ADMIN_KEY);
+//   if (!adminData) return false;
+
+//   const admin = JSON.parse(adminData);
+//   return admin.username === username && admin.password === password;
+// };
+
 const ADMIN_KEY = 'sdvvl_admin';
 
-// Initialize admin credentials (username: admin, password: admin123)
+// Permanent Admin Credentials
+const ADMIN_USERNAME = 'admin';
+const ADMIN_PASSWORD = 'sdvvl@JM26';
+
+// Initialize admin credentials
 export const initializeAdmin = () => {
-  if (!localStorage.getItem(ADMIN_KEY)) {
-    localStorage.setItem(ADMIN_KEY, JSON.stringify({
-      username: 'admin',
-      password: 'sdvvl@JM26' // In production, this should be hashed
-    }));
-  }
+  localStorage.setItem(
+    ADMIN_KEY,
+    JSON.stringify({
+      username: ADMIN_USERNAME,
+      password: ADMIN_PASSWORD,
+    })
+  );
 };
 
 export const validateAdmin = (username: string, password: string): boolean => {
-  const adminData = localStorage.getItem(ADMIN_KEY);
-  if (!adminData) return false;
-  
-  const admin = JSON.parse(adminData);
-  return admin.username === username && admin.password === password;
+  return username === ADMIN_USERNAME && password === ADMIN_PASSWORD;
 };
 
 export const saveCandidateRegistration = (candidate: Omit<Candidate, 'id' | 'createdAt'>): boolean => {
   try {
     const existingData = localStorage.getItem(STORAGE_KEY);
     const candidates: Candidate[] = existingData ? JSON.parse(existingData) : [];
-    
+
     // Check for duplicate email or mobile
     const isDuplicate = candidates.some(
       c => c.email === candidate.email || c.mobile === candidate.mobile
     );
-    
+
     if (isDuplicate) {
       return false;
     }
-    
+
     const newCandidate: Candidate = {
       id: Date.now().toString(),
       ...candidate,
       createdAt: new Date().toISOString(),
     };
-    
+
     candidates.push(newCandidate);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(candidates));
     return true;
@@ -90,8 +112,8 @@ export const getCandidateById = (id: string): Candidate | null => {
 export const searchCandidates = (query: string): Candidate[] => {
   const candidates = getAllCandidates();
   const lowerQuery = query.toLowerCase();
-  
-  return candidates.filter(c => 
+
+  return candidates.filter(c =>
     c.fullName.toLowerCase().includes(lowerQuery) ||
     c.email.toLowerCase().includes(lowerQuery) ||
     c.mobile.includes(query) ||
@@ -101,14 +123,14 @@ export const searchCandidates = (query: string): Candidate[] => {
 
 export const exportToCSV = (): string => {
   const candidates = getAllCandidates();
-  
+
   const headers = [
     'ID', 'Full Name', 'Father Name', 'Date of Birth', 'Gender',
     'Mobile', 'Email', 'Aadhaar', 'Qualification', 'Specialization',
     'Year of Passing', 'Percentage', 'Applying For', 'Experience',
     'Skills', 'Preferred Location', 'Created At'
   ];
-  
+
   const rows = candidates.map(c => [
     c.id,
     c.fullName,
@@ -128,18 +150,18 @@ export const exportToCSV = (): string => {
     c.preferredLocation,
     c.createdAt
   ]);
-  
+
   const csvContent = [
     headers.join(','),
     ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
   ].join('\n');
-  
+
   return csvContent;
 };
 
 export const getStatistics = () => {
   const candidates = getAllCandidates();
-  
+
   return {
     total: candidates.length,
     byJobType: {
