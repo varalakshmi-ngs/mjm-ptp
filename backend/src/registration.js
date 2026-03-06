@@ -64,6 +64,23 @@ router.post(
       photoData,
     } = req.body;
 
+    // Validate resumeData MIME type (base64 string)
+    if (resumeData && typeof resumeData === 'string') {
+      const mimeMatch = resumeData.match(/^data:(.*);base64,/);
+      if (mimeMatch) {
+        const mimeType = mimeMatch[1];
+        const allowedTypes = [
+          'application/pdf',
+          'image/jpeg',
+          'image/jpg',
+          'image/png',
+        ];
+        if (!allowedTypes.includes(mimeType)) {
+          return res.status(400).json({ message: 'Resume must be PDF or image (jpg, jpeg, png)' });
+        }
+      }
+    }
+
     try {
       // Check if email or mobile already exists
       const [existing] = await pool.query(
@@ -134,7 +151,27 @@ router.get('/candidates', async (req, res) => {
        FROM candidates
        ORDER BY created_at DESC`
     );
-    res.json(rows);
+    // Map snake_case to camelCase for frontend compatibility
+    const mappedRows = rows.map(row => ({
+      id: row.id,
+      fullName: row.full_name,
+      fatherName: row.father_name,
+      dateOfBirth: row.date_of_birth,
+      gender: row.gender,
+      mobile: row.mobile,
+      email: row.email,
+      aadhaar: row.aadhaar,
+      qualification: row.qualification,
+      specialization: row.specialization,
+      yearOfPassing: row.year_of_passing,
+      percentage: row.percentage,
+      applyingFor: row.applying_for,
+      experience: row.experience,
+      skills: row.skills,
+      preferredLocation: row.preferred_location,
+      createdAt: row.created_at,
+    }));
+    res.json(mappedRows);
   } catch (err) {
     console.error('Get candidates error:', err.sqlMessage || err);
     res.status(500).json({ message: 'Server error', error: err.message });
