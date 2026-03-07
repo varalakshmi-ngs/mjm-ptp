@@ -400,8 +400,8 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                   <SelectItem value="10th">10th</SelectItem>
                   <SelectItem value="12th">12th</SelectItem>
                   <SelectItem value="Diploma">Diploma</SelectItem>
-                  <SelectItem value="Bachelor's">Bachelor's Degree</SelectItem>
-                  <SelectItem value="Master's">Master's Degree</SelectItem>
+                  <SelectItem value="Bachelor's">Under Graduation (UG)</SelectItem>
+                  <SelectItem value="Master's">Post Graduation (PG)</SelectItem>
                   <SelectItem value="PhD">PhD</SelectItem>
                 </SelectContent>
               </Select>
