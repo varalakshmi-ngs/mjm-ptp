@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { Button } from '../components/ui/button';
@@ -50,7 +50,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
   const [showCamera, setShowCamera] = useState(false);
   const [cameraStream, setCameraStream] = useState<MediaStream | null>(null);
   const [cameraError, setCameraError] = useState<string | null>(null);
-  const videoRef = useState<HTMLVideoElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<RegistrationFormData>();
 
@@ -145,7 +145,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
       setCameraStream(stream);
       setShowCamera(true);
       setTimeout(() => {
-        if (videoRef[0]) videoRef[0].srcObject = stream;
+        if (videoRef.current) videoRef.current.srcObject = stream;
       }, 100);
     } catch {
       setCameraError('Unable to access camera. Please allow camera permissions.');
@@ -153,13 +153,13 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
   };
 
   const handleCapturePhoto = () => {
-    if (!videoRef[0]) return;
+    if (!videoRef.current) return;
     const canvas = document.createElement('canvas');
-    canvas.width = videoRef[0].videoWidth;
-    canvas.height = videoRef[0].videoHeight;
+    canvas.width = videoRef.current.videoWidth;
+    canvas.height = videoRef.current.videoHeight;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
-    ctx.drawImage(videoRef[0], 0, 0, canvas.width, canvas.height);
+    ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
     canvas.toBlob(blob => {
       if (!blob) return;
       const file = new File([blob], 'captured_photo.png', { type: 'image/png' });
@@ -351,7 +351,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
               <Input
                 id="email"
                 type="email"
-                placeholder="your.email@example.com"
+                placeholder="Enter your email id"
                 {...register('email', {
                   required: 'Email is required',
                   pattern: {
@@ -587,11 +587,8 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
             </div>
             {showCamera && (
               <div className="mt-4 flex flex-col items-center gap-2">
-                {/* <video ref={el => (videoRef[0] = el)} autoPlay playsInline className="rounded-lg border w-64 h-48 object-cover" /> */}
                 <video
-                  ref={(el) => {
-                    videoRef[0] = el;
-                  }}
+                  ref={videoRef}
                   autoPlay
                   playsInline
                   className="rounded-lg border w-64 h-48 object-cover"
