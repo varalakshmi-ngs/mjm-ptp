@@ -1,0 +1,16 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # 1. Reverse Proxy for the Backend API
+  # This tells the live server to properly forward the /api/ requests to your Node.js backend!
+  # Instead of searching for a physical folder and returning 404/405 errors, it gives the request to the backend.
+  RewriteRule ^api/(.*)$ http://127.0.0.1:4000/api/$1 [P,L]
+
+  # 2. React Router Fallback
+  # This makes sure that refreshing the page on the Live Server works properly without throwing 404s.
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
