@@ -286,6 +286,7 @@ export default function LandingPage() {
             </div>
           </div>
 
+
         </div>
       </section>
 
@@ -311,6 +312,7 @@ export default function LandingPage() {
                         <h4 className="font-semibold text-gray-900">Venue</h4>
                         <p className="text-gray-700"><b>Smt Jasti Bullemmai College for Women </b></p>
                         <p className="text-gray-600">Rajahmundry, Andhra Pradesh, 533107</p>
+
 
                       </div>
                     </div>

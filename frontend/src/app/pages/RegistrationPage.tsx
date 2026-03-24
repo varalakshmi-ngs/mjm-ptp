@@ -139,6 +139,7 @@ export default function RegistrationPage() {
                 "RESOLUTE SKYQUAD ELECTRONICS",
                 "TTE ELECTRONICS / TCL",
                 "PHONEPE"
+
               ].map((company, index) => (
                 <span key={index} className="inline-block">
                   {company}
