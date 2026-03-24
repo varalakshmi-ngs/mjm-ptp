@@ -95,9 +95,9 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
       } else {
         alert(res.data.message);
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
-      alert('OTP verification failed');
+      alert(err.response?.data?.message || 'OTP verification failed');
     }
   };
 
