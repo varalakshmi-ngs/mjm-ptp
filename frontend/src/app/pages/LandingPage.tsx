@@ -26,10 +26,10 @@ export default function LandingPage() {
               </div>
             </div>
             <nav className="hidden md:flex items-center gap-6 cursor-pointer">
-              <a href="#home" className="text-gray-700 hover:text-blue-600 font-medium">Home</a>
-              <a href="#about" className="text-gray-700 hover:text-blue-600 font-medium">About</a>
-              <a href="#companies" className="text-gray-700 hover:text-blue-600 font-medium">Companies</a>
-              <a href="#event-details" className="text-gray-700 hover:text-blue-600 font-medium">Event Details</a>
+              <button onClick={() => document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' })} className="text-gray-700 hover:text-blue-600 font-medium">Home</button>
+              <button onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })} className="text-gray-700 hover:text-blue-600 font-medium">About</button>
+              <button onClick={() => document.getElementById('companies')?.scrollIntoView({ behavior: 'smooth' })} className="text-gray-700 hover:text-blue-600 font-medium">Companies</button>
+              <button onClick={() => document.getElementById('event-details')?.scrollIntoView({ behavior: 'smooth' })} className="text-gray-700 hover:text-blue-600 font-medium">Event Details</button>
               <button
                 onClick={() => navigate('/register')}
                 className="text-gray-700 hover:bg-amber-300 font-bold cursor-pointer bg-amber-200 h-10 w-40 rounded-xl pb-[2px]"
@@ -415,9 +415,9 @@ export default function LandingPage() {
             <div>
               <h4 className="text-white font-semibold mb-4">Quick Links</h4>
               <ul className="space-y-2">
-                <li><a href="#home" className="hover:text-blue-400 transition-colors">Home</a></li>
-                <li><a href="#about" className="hover:text-blue-400 transition-colors">About Us</a></li>
-                <li><a href="#event-details" className="hover:text-blue-400 transition-colors">Event Details</a></li>
+                <li><button onClick={() => document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-blue-400 transition-colors">Home</button></li>
+                <li><button onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-blue-400 transition-colors">About Us</button></li>
+                <li><button onClick={() => document.getElementById('event-details')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-blue-400 transition-colors">Event Details</button></li>
                 <li>
                   <button onClick={() => navigate('/admin')} className="hover:text-blue-400 transition-colors">
                     login
