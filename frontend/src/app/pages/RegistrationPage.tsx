@@ -70,7 +70,7 @@ export default function RegistrationPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-blue-600 font-bold">4.</span>
-                    <span>Arrive by 9:00 AM on <b>March 28, 2026</b></span>
+                    <span>Arrive by 9:00 AM on <b>March 29, 2026</b></span>
                   </li>
                 </ul>
               </div>
@@ -133,13 +133,17 @@ export default function RegistrationPage() {
                 
                 "SDVVL SKILL HUB",
                 "NUHVIN GLOBAL SERVICES PVT LTD",
+                "PINKMOON TECHNOLOGIES",
+                "BYTESKILLS TECHNOLOGIES",
+                "FLYEX- CARGO",
+                "AIRTEL BLACK",
+                "AIRTEL WIFI",
+                "AXIS BANK",
+                "TAMTAM ROBOTICS SCHOOL",
                 "AIL DIXON TECHNOLOGIES PVT LTD",
                 "PREMIER ENERGIES",
                 "RADIANT",
-                "RESOLUTE SKYQUAD ELECTRONICS",
-                "TTE ELECTRONICS / TCL",
-                "PHONEPE"
-
+                "RESOLUTE SKYQUAD ELECTRONICS"
               ].map((company, index) => (
                 <span key={index} className="inline-block">
                   {company}

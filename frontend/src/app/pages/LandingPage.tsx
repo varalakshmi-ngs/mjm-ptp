@@ -146,7 +146,7 @@ export default function LandingPage() {
         <div className="grid grid-cols-1 lg:grid-cols-[20%_50%_20%] gap-4 md:gap-8">
 
           {/* LEFT SIDE - SDVVL */}
-          <div className="lg:col-span-1 flex items-start justify-center order-1 lg:order-none">
+          <div className="lg:col-span-1 flex items-start justify-center order-1 lg:order-none lg:sticky lg:top-28 lg:self-start">
             <div className="flex flex-col items-center justify-center bg-white rounded-xl shadow-lg border-2 border-amber-400 px-4 sm:px-8 py-6 sm:py-10 w-full">
               <div className="flex flex-col items-center gap-2">
                 <img src="/logos/sdvvl.png" alt="SDVVL logo" className="h-14 md:h-16" />
@@ -174,76 +174,95 @@ export default function LandingPage() {
           {/* CENTER - OTHER COMPANIES */}
           <div className="lg:col-span-1 grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-6 order-2 lg:order-none">
             {[
-              // { name: "PINK MOON TECHNOLOGIES PVT LTD", logo: "/logos/pinkmoon.png" },
-              // { name: "SRAM SOLUTIONS PVT LTD", logo: "/logos/sram.png" },
-              // { name: "FLYEX-CARGO", logo: "/logos/flyex.png" },
-              // { name: "MIRAV TECHNOLOGIES", logo: "/logos/mirav.png" },
-              // { name: "BYTESKILLS TECHNOLOGIES PVT LTD", logo: "/logos/byteskills.png" },
-              // { name: "GEONFY SOLUTIONS PVT LTD", logo: "/logos/geoinfy.png" },
-              // { name: "AIRTEL BLACK", logo: "/logos/airtel-black.jpg" },
-              // { name: "AIRTEL WIFI", logo: "/logos/airtel-wifi.jpg" },
-              // { name: "AXIS BANK", logo: "/logos/axis-bank.png" },
-              // { name: "VARUN MOTORS", logo: "/logos/varun-motors.jpg" },
-              // { name: "DECCAN FINE CHEMICALS", logo: "/logos/deccan.jpg" },
-              // { name: "Auro Bindo", logo: "/logos/auro-bindo.png" },
-              // { name: "BOB Cards", logo: "/logos/bob-card.jpg" },
-              // { name: "SBI Payments", logo: "/logos/sbi-payments.png" },
-              // { name: "Apollo Pharmacy", logo: "/logos/apollo.jpg" },
-              // { name: "IFB Industries", logo: "/logos/ifb.png" },
-              // { name: "Muthoot Finance Ltd.", logo: "/logos/muthoot.png" },
-              // { name: "LG Authorised Service Center", logo: "/logos/lg.jpg" },
-              // { name: "DD Solar Solutions", logo: "/logos/dd-solar.png" },
-              // { name: "Team Lease", logo: "/logos/team-lease.webp" },
-              // { name: "Tata Electronics", logo: "/logos/tata-electronics.png" },
-              // { name: "KIA", logo: "/logos/kia.png" },
+              {
+                name: "PINKMOON TECHNOLOGIES",
+                logo: "/logos/pinkmoon.png",
+                salary: "12,000/- TO 20,000/-",
+                designation: "DATA ANALYST, BUSINESS EXECUTIVE DEVELOPER, SOFTWARE DEVELOPER, APPLICATION DEVELOPER, SYSTEM ANALYST, JR DEVELOPER, WEB DEVELOPER, QUALITY ASSURANCE TESTER, DATA ENGINEER, BUSINESS ANALYST, More IT & Non IT Roles",
+                qualification: "DEGREE, B.TECH, M.TECH",
+                address: "HYDERABAD & VIJAYAWADA"
+              },
+              {
+                name: "BYTESKILLS TECHNOLOGIES",
+                logo: "/logos/byteskills.png",
+                salary: "12,000/- TO 20,000/-",
+                designation: "DATA ANALYST, BUSINESS EXCECUTIVE DEVELOPER, SOFTWARE DEVELOPER, ASSOCIATE SOFTWARE ENGINEER, APPLICATION DEVELOPER, SYSTEM ANALYST, JR DEVELOPER, WEB DEVELOPER, QUALITY ASSURANCE TESTER, DATA ENGINEER, BUSINESS ANALYST,  More IT & Non IT Roles",
+                qualification: "DEGREE, B.TECH, M.TECH",
+                address: "HYDERABAD, VIJAYAWADA & KAKINADA"
+              },
+              {
+                name: "FLYEX- CARGO",
+                logo: "/logos/flyex.png",
+                salary: "20,000/- TO 30,000/-",
+                designation: "BUSINESS DEVELOPMENT ASSOCIATE",
+                qualification: "ANY DEGREE",
+                address: "GOA"
+              },
+              {
+                name: "Airtel Black",
+                logo: "/logos/airtel-black.jpg",
+                salary: "14,400/- TO 17,500/-",
+                designation: "TELECALLER",
+                qualification: "UNDERGRADUATE / GRADUATE",
+                address: "HYDERABAD"
+              },
+              {
+                name: "Airtel Wifi",
+                logo: "/logos/airtel-wifi.jpg",
+                salary: "15,000/- TO 19,000/-",
+                designation: "CUSTOMER SUPPORT",
+                qualification: "GRADUATE / UG WITH EXP",
+                address: "HYDERABAD"
+              },
+              {
+                name: "Axis Bank",
+                logo: "/logos/axis-bank.png",
+                salary: "20,400/-",
+                designation: "VOICE/EMAIL/CHAT PROCESS",
+                qualification: "GRADUATION (MIN 1 YEAR EXP)",
+                address: "HYDERABAD"
+              },
+              {
+                name: "TAMTAM ROBOTICS SCHOOL",
+                logo: "/logos/tamtam.png",
+                salary: "12,500/- TO 25,000/- + ACCOMMODATION",
+                designation: "TEACHING, COMMUNICATION SKILLS",
+                qualification: "B. ED.",
+                address: "PIDUGURALLA (GUNTUR DIST)"
+              },
+              {
+                name: "AIL DIXON",
+                logo: "/logos/dixon.png",
+                salary: "13,500/- TO 23,000/- + FOOD & TRANSPORT",
+                designation: "PRODUCTION (SMT), QUALITY, TESTING",
+                qualification: "SSC, INTER, ITI, DIPLOMA, DEGREE, B.TECH",
+                address: "KADAPA"
+              },
               {
                 name: "PREMIER ENERGIES",
-                logo: "/logos/premier.png", 
-                salary: "RS. 14,000/- TO RS. 18,000/- PF, ESI",
-                designation: "SMT OPERATOR",
-                qualification: "Any Degree",
-                address: "TUKKUGUDA, Hyderabad"
+                logo: "/logos/premier.png",
+                salary: "14,000/- TO 21,000/- + FOOD & TRANSPORT",
+                designation: "GET, DET, PRODUCTION",
+                qualification: "ITI, DIPLOMA, B.TECH (ECE, EEE, MECH)",
+                address: "HYDERABAD"
               },
-              { 
-                name: "RADIANT", 
-                logo: "/logos/radiant.png", 
-                salary: " RS.13,000/- TO RS.16,000/- PF, ESI", 
-                designation: "SMT OPERATOR", 
-                qualification: "SMT OPERATOR", 
-                address: "TUKKUGUDA, Hyderabad" 
+              {
+                name: "RADIANT ELECTRONICS",
+                logo: "/logos/radiant.png",
+                salary: "14,000/- TO 20,000/- + FOOD & TRANSPORT",
+                designation: "PRODUCTION (SMT), QUALITY, TESTING",
+                qualification: "SSC, INTER, ITI, DIPLOMA, DEGREE, B.TECH",
+                address: "HYDERABAD"
               },
-              { 
-                name: "AIL DIXON", 
-                logo: "/logos/dixon.png", 
-                salary: " RS.13,500/- TO RS.22,000/-", 
-                designation: "MFG OPERATOR", 
-                qualification: "ANY DEGREE", 
-                address: "KADAPA" 
-              },
-              { 
-                name: "RESOLUTE SKYQUAD ELECTRONICS", 
-                logo: "/logos/resolute.png", 
-                salary: " RS.13,000/- TO RS.16,000/- PF, ESI", 
-                designation: "SMT OPERATOR", 
-                qualification: "ANY DEGREE", 
-                address: "TUKKUGUDA, Hyderabad" 
-              },
-              { 
-                name: "TTE ELECTRONICS / TCL", 
-                logo: "/logos/tcl.svg", 
-                salary: " RS.14,632/- TO RS.20,000/- PF, ESI AND OT ALSO AVAILABLE", 
-                designation: "OPERATORS", 
-                qualification: "ANY DEGREE", 
-                address: "TIRUPATHI" 
-              },
-              { 
-                name: "PHONEPE", 
-                logo: "/logos/phonpe.png", 
-                salary: " RS.14,632/- TO RS.20,000/- PF, ESI AND OT ALSO AVAILABLE", 
-                designation: "OPERATORS", 
-                qualification: "ANY DEGREE", 
-                address: "KAKINADA" 
-              },
+              {
+                name: "SKY QUARD ELECTRONICS",
+                logo: "/logos/resolute.png",
+                salary: "14,000/- TO 20,000/- + FOOD & TRANSPORT",
+                designation: "PRODUCTION (SMT), QUALITY, TESTING",
+                qualification: "SSC, INTER, ITI, DIPLOMA, DEGREE, B.TECH",
+                address: "HYDERABAD"
+              }
+              
             ].map((company) => (
               <div
                 key={company.name}
@@ -256,7 +275,7 @@ export default function LandingPage() {
                 />
                 <span className="text-xs md:text-sm">{company.name}</span>
                 <span className="text-xs md:text-sm text-black-500 mt-1">{company.salary}</span>
-                <span className="text-xs text-gray-600">Designation: {company.designation}</span>
+                <span className="text-xs text-gray-600"><b className='text-sm text-grey-100'>Designation :</b> {company.designation}</span>
                 <span className="text-xs text-gray-600">Qualification: {company.qualification}</span>
                 <span className="text-xs text-gray-600">Address: {company.address}</span>
               </div>
@@ -264,7 +283,7 @@ export default function LandingPage() {
           </div>
 
           {/* RIGHT SIDE - NGS */}
-          <div className="lg:col-span-1 flex items-start justify-center order-3 lg:order-none">
+          <div className="lg:col-span-1 flex items-start justify-center order-3 lg:order-none lg:sticky lg:top-28 lg:self-start">
             <div className="flex flex-col items-center justify-center bg-white rounded-xl shadow-lg border-2 border-amber-400 px-4 sm:px-8 py-6 sm:py-10 w-full">
               <div className="flex flex-col items-center gap-2">
                 <img src="/logos/ngs.png" alt="NGS logo" className="h-12 md:h-16" />
@@ -310,8 +329,8 @@ export default function LandingPage() {
                       </div>
                       <div>
                         <h4 className="font-semibold text-gray-900">Venue</h4>
-                        <p className="text-gray-700"><b>Smt Jasti Bullemmai College for Women </b></p>
-                        <p className="text-gray-600">Rajahmundry, Andhra Pradesh, 533107</p>
+                        <p className="text-gray-700"><b>VEDA DEGREE COLLEGE </b></p>
+                        <p className="text-gray-600">TATIPAKA Andhra Pradesh, 533249</p>
 
 
                       </div>
@@ -368,7 +387,7 @@ export default function LandingPage() {
 
                   <div className="mt-8 bg-white rounded-lg p-4 border-2 border-blue-300">
                     <p className="text-sm font-semibold text-blue-900 mb-2">⏰ Event Timing</p>
-                    <p className="text-2xl font-bold text-blue-600"><b>March 28, 2026</b></p>
+                    <p className="text-2xl font-bold text-blue-600"><b>March 29, 2026</b></p>
                     <p className="text-gray-700">9:00 AM - 5:00 PM</p>
                   </div>
                 </div>
