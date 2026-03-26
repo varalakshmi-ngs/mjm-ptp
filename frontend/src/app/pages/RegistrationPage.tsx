@@ -143,7 +143,9 @@ export default function RegistrationPage() {
                 "AIL DIXON TECHNOLOGIES PVT LTD",
                 "PREMIER ENERGIES",
                 "RADIANT",
-                "RESOLUTE SKYQUAD ELECTRONICS"
+                "RESOLUTE SKYQUAD ELECTRONICS",
+                "COGNITO INSIGHTS SOLUTIONS PVT LTD",
+                "AASHVEE TECH SOLUTIONS PVT LTD"
               ].map((company, index) => (
                 <span key={index} className="inline-block">
                   {company}
