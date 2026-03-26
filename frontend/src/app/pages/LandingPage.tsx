@@ -261,6 +261,22 @@ export default function LandingPage() {
                 designation: "PRODUCTION (SMT), QUALITY, TESTING",
                 qualification: "SSC, INTER, ITI, DIPLOMA, DEGREE, B.TECH",
                 address: "HYDERABAD"
+              },
+              {
+                name: "COGNITO INSIGHTS SOLUTIONS PVT LTD",
+                logo: "/logos/cognito.png",
+                salary: "12,000/- TO 20,000/-",
+                designation: "DATA ANALYST, BUSINESS EXECUTIVE DEVELOPER, SOFTWARE DEVELOPER, APPLICATION DEVELOPER, SYSTEM ANALYST, JR DEVELOPER, WEB DEVELOPER, QUALITY ASSURANCE TESTER, DATA ENGINEER, BUSINESS ANALYST, More IT & Non IT Roles",
+                qualification: "DEGREE, B.TECH, M.TECH",
+                address: "HYDERABAD"
+              },
+              {
+                name: "AASHVEE TECH SOLUTIONS PVT LTD",
+                logo: "/logos/aashvee.png",
+                salary: "13000/- TO 18,000/-",
+                designation: "DATA ANALYST, BUSINESS EXECUTIVE DEVELOPER, SOFTWARE DEVELOPER, APPLICATION DEVELOPER, SYSTEM ANALYST, JR DEVELOPER, WEB DEVELOPER, QUALITY ASSURANCE TESTER, DATA ENGINEER, BUSINESS ANALYST, More IT & Non IT Roles",
+                qualification: "DEGREE, B.TECH, M.TECH",
+                address: "HYDERABAD"
               }
               
             ].map((company) => (
