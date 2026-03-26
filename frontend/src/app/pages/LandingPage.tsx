@@ -151,10 +151,11 @@ export default function LandingPage() {
               <div className="flex flex-col items-center gap-2">
                 <img src="/logos/sdvvl.png" alt="SDVVL logo" className="h-14 md:h-16" />
                 <span className="text-lg md:text-xl font-bold text-amber-900 text-center border-b-2">
-                  SDVVL SURVEY & CONSTRUCTION PVT LTD
+                  <b>SDVVL SKILL HUB</b>
                 </span>
                 <span className="text-lg md:text-xl font-bold text-amber-900 text-center">
-                  SDVVL SKILL HUB
+                  SDVVL SURVEY & CONSTRUCTION PVT LTD
+
                 </span>
                 <a href="https://sdvvl.com" target="_blank" className="text-blue-500 text-sm md:text-base">
                   www.sdvvl.com
@@ -278,7 +279,7 @@ export default function LandingPage() {
                 qualification: "DEGREE, B.TECH, M.TECH",
                 address: "HYDERABAD"
               }
-              
+
             ].map((company) => (
               <div
                 key={company.name}
