@@ -184,54 +184,6 @@ export default function LandingPage() {
                 address: "HYDERABAD & VIJAYAWADA"
               },
               {
-                name: "BYTESKILLS TECHNOLOGIES",
-                logo: "/logos/byteskills.png",
-                salary: "12,000/- TO 20,000/-",
-                designation: "DATA ANALYST, BUSINESS EXCECUTIVE DEVELOPER, SOFTWARE DEVELOPER, ASSOCIATE SOFTWARE ENGINEER, APPLICATION DEVELOPER, SYSTEM ANALYST, JR DEVELOPER, WEB DEVELOPER, QUALITY ASSURANCE TESTER, DATA ENGINEER, BUSINESS ANALYST,  More IT & Non IT Roles",
-                qualification: "DEGREE, B.TECH, M.TECH",
-                address: "HYDERABAD, VIJAYAWADA & KAKINADA"
-              },
-              {
-                name: "FLYEX- CARGO",
-                logo: "/logos/flyex.png",
-                salary: "20,000/- TO 30,000/-",
-                designation: "BUSINESS DEVELOPMENT ASSOCIATE",
-                qualification: "ANY DEGREE",
-                address: "GOA"
-              },
-              {
-                name: "Airtel Black",
-                logo: "/logos/airtel-black.jpg",
-                salary: "14,400/- TO 17,500/-",
-                designation: "TELECALLER",
-                qualification: "UNDERGRADUATE / GRADUATE",
-                address: "HYDERABAD"
-              },
-              {
-                name: "Airtel Wifi",
-                logo: "/logos/airtel-wifi.jpg",
-                salary: "15,000/- TO 19,000/-",
-                designation: "CUSTOMER SUPPORT",
-                qualification: "GRADUATE / UG WITH EXP",
-                address: "HYDERABAD"
-              },
-              {
-                name: "Axis Bank",
-                logo: "/logos/axis-bank.png",
-                salary: "20,400/-",
-                designation: "VOICE/EMAIL/CHAT PROCESS",
-                qualification: "GRADUATION (MIN 1 YEAR EXP)",
-                address: "HYDERABAD"
-              },
-              {
-                name: "TAMTAM ROBOTICS SCHOOL",
-                logo: "/logos/tamtam.png",
-                salary: "12,500/- TO 25,000/- + ACCOMMODATION",
-                designation: "TEACHING, COMMUNICATION SKILLS",
-                qualification: "B. ED.",
-                address: "PIDUGURALLA (GUNTUR DIST)"
-              },
-              {
                 name: "AIL DIXON",
                 logo: "/logos/dixon.png",
                 salary: "13,500/- TO 23,000/- + FOOD & TRANSPORT",
@@ -239,6 +191,63 @@ export default function LandingPage() {
                 qualification: "SSC, INTER, ITI, DIPLOMA, DEGREE, B.TECH",
                 address: "KADAPA"
               },
+              {
+                name: "Auro bindo Pharmaceuticals",
+                logo: "/logos/auro-bindo.png",
+                salary: "17,500/-",
+                designation: "Multiple Roles in Pharma",
+                qualification: "B Sc / B Pharma",
+                address: "HYDERABAD"
+              },
+              {
+                name: "Apitoria Pharma",
+                logo: "/logos/apitoria.png",
+                salary: "17,500/-",
+                designation: "Multiple Roles in Pharma",
+                qualification: "B Sc / B Pharma",
+                address: "HYDERABAD"
+              },
+              {
+                name: "Honour Lab Limited",
+                logo: "/logos/honour.svg",
+                salary: "18800/-",
+                designation: "Multiple Roles in Pharma",
+                qualification: "ANY DEGREE",
+                address: "Hyderabad"
+              },
+              {
+                name: "Raichem Medicare",
+                logo: "/logos/raichem.webp",
+                salary: "21500/-",
+                designation: "Multiple Roles in Pharma",
+                qualification: "B Sc / B Pharma",
+                address: "KARNATAKA"
+              },
+              {
+                name: "Shakthi Hormann",
+                logo: "/logos/hormann.png",
+                salary: "",
+                designation: "PRODUCTION (SMT), QUALITY, TESTING",
+                qualification: "ITI Fitters & Electricians",
+                address: "Hyderabad"
+              },
+              {
+                name: "Voith Turbo Private Limited",
+                logo: "/logos/voith.svg",
+                salary: "",
+                designation: "PRODUCTION (SMT), QUALITY, TESTING",
+                qualification: "ITI / B Tech / Diploma",
+                address: "HYDERABAD"
+              },
+              {
+                name: "Neuland Laboratories Ltd",
+                logo: "/logos/neulan.svg",
+                salary: "18,000/-",
+                designation: "Multiple Roles in Pharma",
+                qualification: "BSC",
+                address: "Hyderabad"
+              },
+
               {
                 name: "PREMIER ENERGIES",
                 logo: "/logos/premier.png",
@@ -264,21 +273,14 @@ export default function LandingPage() {
                 address: "HYDERABAD"
               },
               {
-                name: "COGNITO INSIGHTS SOLUTIONS PVT LTD",
-                logo: "/logos/cognito.png",
-                salary: "12,000/- TO 20,000/-",
-                designation: "DATA ANALYST, BUSINESS EXECUTIVE DEVELOPER, SOFTWARE DEVELOPER, APPLICATION DEVELOPER, SYSTEM ANALYST, JR DEVELOPER, WEB DEVELOPER, QUALITY ASSURANCE TESTER, DATA ENGINEER, BUSINESS ANALYST, More IT & Non IT Roles",
-                qualification: "DEGREE, B.TECH, M.TECH",
-                address: "HYDERABAD"
-              },
-              {
-                name: "AASHVEE TECH SOLUTIONS PVT LTD",
-                logo: "/logos/aashvee.png",
-                salary: "13000/- TO 18,000/-",
-                designation: "DATA ANALYST, BUSINESS EXECUTIVE DEVELOPER, SOFTWARE DEVELOPER, APPLICATION DEVELOPER, SYSTEM ANALYST, JR DEVELOPER, WEB DEVELOPER, QUALITY ASSURANCE TESTER, DATA ENGINEER, BUSINESS ANALYST, More IT & Non IT Roles",
-                qualification: "DEGREE, B.TECH, M.TECH",
-                address: "HYDERABAD"
+                name: "Lyfius Pharma Kakinada",
+                logo: "/logos/lyfus.png",
+                salary: "18500/-",
+                designation: "Multiple Roles in Pharma",
+                qualification: "B.COM / BA",
+                address: "A.V. NAGRAM (KAKINADA)"
               }
+
 
             ].map((company) => (
               <div
@@ -346,8 +348,8 @@ export default function LandingPage() {
                       </div>
                       <div>
                         <h4 className="font-semibold text-gray-900">Venue</h4>
-                        <p className="text-gray-700"><b>VEDA DEGREE COLLEGE </b></p>
-                        <p className="text-gray-600">TATIPAKA Andhra Pradesh, 533249</p>
+                        <p className="text-gray-700"><b>Suryaraya Degree College </b></p>
+                        <p className="text-gray-600">Pithapuram Andhra Pradesh, 533249</p>
 
 
                       </div>
@@ -404,7 +406,7 @@ export default function LandingPage() {
 
                   <div className="mt-8 bg-white rounded-lg p-4 border-2 border-blue-300">
                     <p className="text-sm font-semibold text-blue-900 mb-2">⏰ Event Timing</p>
-                    <p className="text-2xl font-bold text-blue-600"><b>March 29, 2026</b></p>
+                    <p className="text-2xl font-bold text-blue-600"><b>April 18, 2026</b></p>
                     <p className="text-gray-700">9:00 AM - 5:00 PM</p>
                   </div>
                 </div>
