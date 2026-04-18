@@ -59,7 +59,7 @@ export default function LandingPage() {
               <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
                 <Users className="h-8 w-8 text-blue-600" />
               </div>
-              <h3 className="text-3xl font-bold text-gray-900">20+</h3>
+              <h3 className="text-3xl font-bold text-gray-900">30+</h3>
               <p className="text-gray-600">Companies</p>
             </div>
             <div className="text-center">
@@ -159,10 +159,10 @@ export default function LandingPage() {
                 <span className="text-lg md:text-xl font-bold text-blue-600 text-center border-b-2">
                   <b>SDVVL SKILL HUB</b>
                 </span>
-                <span className="text-lg md:text-xl font-bold text-amber-900 text-center">
+                {/* <span className="text-lg md:text-xl font-bold text-amber-900 text-center">
                   SDVVL SURVEY & CONSTRUCTION PVT LTD
 
-                </span>
+                </span> */}
                 <a href="https://sdvvl.com" target="_blank" className="text-blue-500 text-sm md:text-base">
                   www.sdvvl.com
                 </a>
@@ -181,6 +181,14 @@ export default function LandingPage() {
           {/* CENTER - OTHER COMPANIES */}
           <div className="lg:col-span-1 grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-6 order-2 lg:order-none">
             {[
+              {
+                name: "SDVVL SURVEY & CONSTRUCTION PVT LTD",
+                logo: "/logos/sdvvl.png",
+                salary: "12,000/- TO 18,000/-",
+                designation: "Survey Engineer, Site Engineer,Designing Engineer,Site Supervisor",
+                qualification: "Diploma, B.TECH, M.TECH",
+                address: "Kakinada,AP & Telangana"
+              },
               {
                 name: "PINKMOON TECHNOLOGIES",
                 logo: "/logos/pinkmoon.png",
@@ -215,6 +223,14 @@ export default function LandingPage() {
                 address: "Rajahmundry"
               },
               {
+                name: "Makers Mind Soft Solutions Pvt Ltd",
+                logo: "/logos/makersmind.jpg",
+                salary: "10,000/- to 15,000/-",
+                designation: "Multiple IT Roles",
+                qualification: "Any Degree",
+                address: "Kakinada"
+              },
+              {
                 name: "FLYEX CARGO",
                 logo: "/logos/flyex.png",
                 salary: "20,000/- to 30,000/-",
@@ -237,6 +253,31 @@ export default function LandingPage() {
                 designation: "Marketing Executive",
                 qualification: "10th to Any Degree",
                 address: "Kakinada,Rajahmundry"
+              },
+              {
+                name: "Kia Motors",
+                logo: "/logos/kia.png",
+                salary: "15000/- to 18,000/- + On duty Food & Transport",
+                designation: "PRODUCTION (SMT), QUALITY, TESTING",
+                qualification: "SSC, INTER, ITI, DIPLOMA, DEGREE, B.TECH",
+                address: "Anantapur"
+              },
+
+              {
+                name: "Micromax",
+                logo: "/logos/micromax.png",
+                salary: "15000/- to 18,000/- + On duty Food & Transport",
+                designation: "PRODUCTION (SMT), QUALITY, TESTING",
+                qualification: "SSC, INTER, ITI, DIPLOMA, DEGREE, B.TECH",
+                address: "HYDERABAD"
+              },
+              {
+                name: "Renewsys Pvt Ltd",
+                logo: "/logos/renewsys.png",
+                salary: "Upto 20,000/-",
+                designation: "PRODUCTION (SMT), QUALITY, TESTING",
+                qualification: "SSC, INTER, ITI, DIPLOMA, DEGREE, B.TECH",
+                address: "HYDERABAD"
               },
               {
                 name: "AIL DIXON",
