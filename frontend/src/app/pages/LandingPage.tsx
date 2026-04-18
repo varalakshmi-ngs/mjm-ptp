@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router';
 import { Hero } from '../components/Hero';
+import { WelcomePopup } from '../components/WelcomePopup';
 import { Building2, Users, Briefcase, TrendingUp, MapPin, Phone, Mail } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 
@@ -12,6 +13,8 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      {/* Welcome Popup */}
+      <WelcomePopup />
       {/* Header */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="container mx-auto px-4">
@@ -144,13 +147,16 @@ export default function LandingPage() {
       {/* Companies Section */}
       <section id="companies" className="py-8 md:py-12 bg-amber-50 px-3 sm:px-5">
         <div className="grid grid-cols-1 lg:grid-cols-[20%_50%_20%] gap-4 md:gap-8">
+          <h1 className="text-2xl md:text-3xl font-bold text-amber-900 text-center col-span-full">
+            Our Companies
+          </h1>
 
           {/* LEFT SIDE - SDVVL */}
           <div className="lg:col-span-1 flex items-start justify-center order-1 lg:order-none lg:sticky lg:top-28 lg:self-start">
             <div className="flex flex-col items-center justify-center bg-white rounded-xl shadow-lg border-2 border-amber-400 px-4 sm:px-8 py-6 sm:py-10 w-full">
               <div className="flex flex-col items-center gap-2">
                 <img src="/logos/sdvvl.png" alt="SDVVL logo" className="h-14 md:h-16" />
-                <span className="text-lg md:text-xl font-bold text-amber-900 text-center border-b-2">
+                <span className="text-lg md:text-xl font-bold text-blue-600 text-center border-b-2">
                   <b>SDVVL SKILL HUB</b>
                 </span>
                 <span className="text-lg md:text-xl font-bold text-amber-900 text-center">
@@ -178,10 +184,59 @@ export default function LandingPage() {
               {
                 name: "PINKMOON TECHNOLOGIES",
                 logo: "/logos/pinkmoon.png",
-                salary: "12,000/- TO 20,000/-",
+                salary: "3.2 LPA to 6 LPA",
                 designation: "DATA ANALYST, BUSINESS EXECUTIVE DEVELOPER, SOFTWARE DEVELOPER, APPLICATION DEVELOPER, SYSTEM ANALYST, JR DEVELOPER, WEB DEVELOPER, QUALITY ASSURANCE TESTER, DATA ENGINEER, BUSINESS ANALYST, More IT & Non IT Roles",
-                qualification: "DEGREE, B.TECH, M.TECH",
+                qualification: "B.TECH, M.TECH",
                 address: "HYDERABAD & VIJAYAWADA"
+              },
+              {
+                name: "Byte Skills Technology pvt ltd",
+                logo: "/logos/byteskills.png",
+                salary: "2.8 LPA to 8 LPA",
+                designation: "DATA ANALYST, BUSINESS EXECUTIVE DEVELOPER, SOFTWARE DEVELOPER, APPLICATION DEVELOPER, SYSTEM ANALYST, JR DEVELOPER, WEB DEVELOPER, QUALITY ASSURANCE TESTER, DATA ENGINEER, BUSINESS ANALYST, More IT & Non IT Roles",
+                qualification: "B.TECH, M.TECH",
+                address: "Vijayawada"
+              },
+              {
+                name: "Cognito Insights Solutions Pvt Ltd",
+                logo: "/logos/cognito.png",
+                salary: "15,000/- to 30,000/-",
+                designation: "Jr.Frontend Engineer, Jr. Backend Engineer",
+                qualification: "Graduation & Above",
+                address: "Rajahmundry"
+              },
+              
+              {
+                name: "Ashvee Tech Solutions Pvt Ltd",
+                logo: "/logos/aashvee.png",
+                salary: "15,000/- to 30,000/-",
+                designation: "Jr.AI&ML Engineer, Jr.Computer Vision Engineer",
+                qualification: "Graduation & Above",
+                address: "Rajahmundry"
+              },
+              {
+                name: "FLYEX CARGO",
+                logo: "/logos/flyex.png",
+                salary: "20,000/- to 30,000/-",
+                designation: "Business Development Executive",
+                qualification: "Any Degree",
+                address: "Goa"
+              },
+              {
+                name: "Tam Tam Robotics school",
+                logo: "/logos/tamtam.png",
+                salary: "12,500/- to 25,000/-",
+                designation: "Teaching",
+                qualification: "B.Ed,Degree",
+                address: "Piduguralla"
+              },
+              {
+                name: "PhonePe",
+                logo: "/logos/phonpe.png",
+                salary: "18,000/-",
+                designation: "Marketing Executive",
+                qualification: "10th to Any Degree",
+                address: "Kakinada,Rajahmundry"
               },
               {
                 name: "AIL DIXON",
@@ -272,14 +327,14 @@ export default function LandingPage() {
                 qualification: "SSC, INTER, ITI, DIPLOMA, DEGREE, B.TECH",
                 address: "HYDERABAD"
               },
-              {
-                name: "Lyfius Pharma Kakinada",
-                logo: "/logos/lyfus.png",
-                salary: "18500/-",
-                designation: "Multiple Roles in Pharma",
-                qualification: "B.COM / BA",
-                address: "A.V. NAGRAM (KAKINADA)"
-              }
+              // {
+              //   name: "Lyfius Pharma Kakinada",
+              //   logo: "/logos/lyfus.png",
+              //   salary: "18500/-",
+              //   designation: "Multiple Roles in Pharma",
+              //   qualification: "B.COM / BA",
+              //   address: "A.V. NAGRAM (KAKINADA)"
+              // }
 
 
             ].map((company) => (
@@ -306,8 +361,8 @@ export default function LandingPage() {
             <div className="flex flex-col items-center justify-center bg-white rounded-xl shadow-lg border-2 border-amber-400 px-4 sm:px-8 py-6 sm:py-10 w-full">
               <div className="flex flex-col items-center gap-2">
                 <img src="/logos/ngs.png" alt="NGS logo" className="h-12 md:h-16" />
-                <span className="text-lg md:text-xl font-bold text-amber-900 text-center">
-                  Nuhvin Global Services Private Limited
+                <span className="text-lg md:text-xl font-bold text-[#ff6600] text-center">
+                  Nuhvin Global Services Pvt Ltd
                 </span>
                 <a href="https://nuhvin.com" target="_blank" className="text-blue-500 text-sm md:text-base">
                   www.nuhvin.com
@@ -348,8 +403,8 @@ export default function LandingPage() {
                       </div>
                       <div>
                         <h4 className="font-semibold text-gray-900">Venue</h4>
-                        <p className="text-gray-700"><b>Suryaraya Degree College </b></p>
-                        <p className="text-gray-600">Pithapuram Andhra Pradesh, 533249</p>
+                        <p className="text-gray-700"><b>SDVVL SKILL HUB </b></p>
+                        <p className="text-gray-600">Kakinada Andhra Pradesh, 533005</p>
 
 
                       </div>
@@ -406,7 +461,7 @@ export default function LandingPage() {
 
                   <div className="mt-8 bg-white rounded-lg p-4 border-2 border-blue-300">
                     <p className="text-sm font-semibold text-blue-900 mb-2">⏰ Event Timing</p>
-                    <p className="text-2xl font-bold text-blue-600"><b>April 18, 2026</b></p>
+                    <p className="text-2xl font-bold text-blue-600"><b>April 27, 2026</b></p>
                     <p className="text-gray-700">9:00 AM - 5:00 PM</p>
                   </div>
                 </div>

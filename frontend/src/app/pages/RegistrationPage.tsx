@@ -70,7 +70,7 @@ export default function RegistrationPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-blue-600 font-bold">4.</span>
-                    <span>Arrive by 9:00 AM on <b>April 18, 2026</b></span>
+                    <span>Arrive by 9:00 AM on <b>April 27, 2026</b></span>
                   </li>
                 </ul>
               </div>
