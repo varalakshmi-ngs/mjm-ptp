@@ -213,7 +213,14 @@ export default function LandingPage() {
                 qualification: "Graduation & Above",
                 address: "Rajahmundry"
               },
-              
+              {
+                name: "SRAM SOLUTIONS",
+                logo: "/logos/sram.png",
+                salary: "3.2 LPA to 6 LPA",
+                designation: "DATA ANALYST, BUSINESS EXECUTIVE DEVELOPER, SOFTWARE DEVELOPER, APPLICATION DEVELOPER, SYSTEM ANALYST, JR DEVELOPER, WEB DEVELOPER, QUALITY ASSURANCE TESTER, DATA ENGINEER, BUSINESS ANALYST,Digital Marketing Executive",
+                qualification: "B.TECH, M.TECH",
+                address: "HYDERABAD"
+              },
               {
                 name: "Ashvee Tech Solutions Pvt Ltd",
                 logo: "/logos/aashvee.png",
@@ -222,6 +229,7 @@ export default function LandingPage() {
                 qualification: "Graduation & Above",
                 address: "Rajahmundry"
               },
+              
               {
                 name: "Makers Mind Soft Solutions Pvt Ltd",
                 logo: "/logos/makersmind.jpg",
@@ -270,6 +278,14 @@ export default function LandingPage() {
                 designation: "PRODUCTION (SMT), QUALITY, TESTING",
                 qualification: "SSC, INTER, ITI, DIPLOMA, DEGREE, B.TECH",
                 address: "HYDERABAD"
+              },
+              {
+                name: "Skyfri Energy Pvt Ltd",
+                logo: "/logos/skyfri.png",
+                salary: "13,500/- + PF, ESI",
+                designation: "PRODUCTION (SMT), QUALITY, TESTING",
+                qualification: "SSC, INTER, ITI, DIPLOMA, DEGREE, B.TECH",
+                address: "Tirupati,Kadapa & Nellore"
               },
               {
                 name: "Renewsys Pvt Ltd",
