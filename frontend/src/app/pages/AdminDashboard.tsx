@@ -9,7 +9,8 @@ import {
   Download,
   Eye,
   TrendingUp,
-  Filter
+  Filter,
+  RefreshCcw
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
@@ -171,6 +172,11 @@ export default function AdminDashboard() {
     navigate('/admin');
   };
 
+  const handleRefresh = async () => {
+    await fetchCandidates();
+    toast.success('Dashboard refreshed');
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -186,10 +192,16 @@ export default function AdminDashboard() {
                 <p className="text-sm text-gray-600">Mega Job Mela 2026</p>
               </div>
             </div>
-            <Button onClick={handleLogout} variant="outline" className="gap-2">
-              <LogOut className="h-4 w-4" />
-              Logout
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button onClick={handleRefresh} variant="outline" className="gap-2">
+                <RefreshCcw className="h-4 w-4" />
+                Refresh
+              </Button>
+              <Button onClick={handleLogout} variant="outline" className="gap-2">
+                <LogOut className="h-4 w-4" />
+                Logout
+              </Button>
+            </div>
           </div>
         </div>
       </header>
