@@ -33,6 +33,7 @@ export default function LandingPage() {
               <button onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })} className="text-gray-700 hover:text-blue-600 font-medium">About</button>
               <button onClick={() => document.getElementById('companies')?.scrollIntoView({ behavior: 'smooth' })} className="text-gray-700 hover:text-blue-600 font-medium">Companies</button>
               <button onClick={() => document.getElementById('event-details')?.scrollIntoView({ behavior: 'smooth' })} className="text-gray-700 hover:text-blue-600 font-medium">Event Details</button>
+              <button onClick={() => navigate('/gallery')} className="text-gray-700 hover:text-blue-600 font-medium">Gallery</button>
               <button
                 onClick={() => navigate('/register')}
                 className="text-gray-700 hover:bg-amber-300 font-bold cursor-pointer bg-amber-200 h-10 w-40 rounded-xl pb-[2px]"

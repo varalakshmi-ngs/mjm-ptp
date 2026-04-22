@@ -4,13 +4,16 @@ import helmet from 'helmet';
 import dotenv from 'dotenv';
 import registrationRouter from './registration.js';
 import otpRoutes from './routes/otpRoutes.js';
+import galleryRoutes from './routes/galleryRoutes.js';
 
 dotenv.config();
 
 const app = express();
 
 app.disable('x-powered-by');
-app.use(helmet());
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" }
+}));
 
 const allowedOrigins = [
   "http://localhost:5173",
@@ -34,6 +37,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/registration', registrationRouter);
 app.use('/api/otp', otpRoutes);
+app.use('/api/gallery', galleryRoutes);
 
 app.get('/', (req, res) => {
   res.send('JobMela Backend Running');

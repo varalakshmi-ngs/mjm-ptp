@@ -6,7 +6,10 @@ import { CheckIcon } from "lucide-react";
 
 import { cn } from "./utils";
 
-const Checkbox = React.forwardRef<typeof CheckboxPrimitive.Root, React.ComponentProps<typeof CheckboxPrimitive.Root>>(
+const Checkbox = React.forwardRef<
+  React.ElementRef<typeof CheckboxPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
+>(
   ({ className, ...props }, ref) => {
     return (
       <CheckboxPrimitive.Root

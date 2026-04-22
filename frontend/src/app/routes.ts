@@ -3,6 +3,7 @@ import LandingPage from './pages/LandingPage';
 import RegistrationPage from './pages/RegistrationPage';
 import AdminLoginPage from './pages/AdminLoginPage';
 import AdminDashboard from './pages/AdminDashboard';
+import GalleryPage from './pages/gallery';
 
 export const router = createHashRouter([
   {
@@ -12,6 +13,10 @@ export const router = createHashRouter([
   {
     path: '/register',
     Component: RegistrationPage,
+  },
+  {
+    path: '/gallery',
+    Component: GalleryPage,
   },
   {
     path: '/admin',
