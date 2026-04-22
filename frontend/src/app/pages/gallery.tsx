@@ -153,27 +153,29 @@ export default function GalleryPage() {
               {albums.map((album) => (
                 <div
                   key={album.id}
-                  className="bg-white rounded-xl border border-gray-100 overflow-hidden cursor-pointer hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col group"
+                  className="bg-white rounded-xl border-2 border-gray-200 overflow-hidden cursor-pointer hover:shadow-2xl hover:border-blue-500 hover:-translate-y-1 transition-all duration-300 flex flex-col group shadow-sm"
                   onClick={() => handleAlbumClick(album)}
                 >
-                  <div className="w-full aspect-[4/3] bg-gray-50 relative overflow-hidden">
+                  <div className="w-full aspect-[4/3] bg-gray-50 relative overflow-hidden flex items-center justify-center p-2">
                     {album.cover_image_id ? (
                       <img
                         src={getImageUrl(album.cover_image_id)}
                         alt={album.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500"
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
                         <Grid3x3 className="h-12 w-12 text-gray-300" />
                       </div>
                     )}
-                    <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-white text-xs px-3 py-1.5 rounded-full font-medium tracking-wide shadow-sm">
-                      Album
-                    </div>
+                    {/* <div className="absolute top-3 right-3 bg-blue-600/80 backdrop-blur-md text-white text-xs px-3 py-1.5 rounded-full font-bold tracking-wide shadow-sm">
+                      ALBUM
+                    </div> */}
                   </div>
-                  <div className="p-5 bg-white border-t border-gray-50">
-                    <h3 className="font-bold text-lg text-gray-900 group-hover:text-blue-600 transition-colors truncate">{album.title}</h3>
+                  <div className="p-6 bg-white border-t border-gray-100 text-center">
+                    <h3 className="font-extrabold text-xl text-gray-900 group-hover:text-blue-600 transition-colors uppercase tracking-tight">
+                      {album.title}
+                    </h3>
                   </div>
                 </div>
               ))}

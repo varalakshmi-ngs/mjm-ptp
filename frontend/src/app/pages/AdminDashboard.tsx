@@ -15,7 +15,8 @@ import {
   Trash2,
   Plus,
   Loader,
-  X
+  X,
+  UploadCloud
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
@@ -820,31 +821,51 @@ export default function AdminDashboard() {
               Upload a new album with multiple images to the event gallery
             </DialogDescription>
           </DialogHeader>
-          <div className="space-y-4">
-            <div>
-              <label className="text-sm font-medium text-gray-700">Album Title</label>
+          <div className="space-y-6 py-4">
+            <div className="space-y-2">
+              <label className="text-sm font-semibold text-gray-700">Album Title</label>
               <Input
-                placeholder="Enter album title"
+                placeholder="Ex: Job Mela 2026 Highlights"
                 value={albumTitle}
                 onChange={(e) => setAlbumTitle(e.target.value)}
                 disabled={uploadingAlbum}
+                className="h-11"
               />
             </div>
-            <div>
-              <label className="text-sm font-medium text-gray-700">Select Images</label>
-              <input
-                type="file"
-                accept="image/*"
-                multiple
-                onChange={(e) => setSelectedFiles(e.target.files)}
-                disabled={uploadingAlbum}
-                className="block w-full mt-1 text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-              />
-              {selectedFiles && selectedFiles.length > 0 && (
-                <p className="mt-2 text-sm text-gray-500">{selectedFiles.length} file(s) selected</p>
-              )}
+            <div className="space-y-2">
+              <label className="text-sm font-semibold text-gray-700">Upload Images</label>
+              <div 
+                className={`relative border-2 border-dashed rounded-xl p-8 transition-all flex flex-col items-center justify-center gap-3 cursor-pointer ${
+                  selectedFiles && selectedFiles.length > 0 
+                  ? 'border-blue-500 bg-blue-50' 
+                  : 'border-gray-200 hover:border-blue-400 hover:bg-gray-50'
+                }`}
+                onClick={() => !uploadingAlbum && document.getElementById('file-upload')?.click()}
+              >
+                <input
+                  id="file-upload"
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  className="hidden"
+                  onChange={(e) => setSelectedFiles(e.target.files)}
+                  disabled={uploadingAlbum}
+                />
+                <div className="bg-blue-100 p-3 rounded-full">
+                  <UploadCloud className="h-6 w-6 text-blue-600" />
+                </div>
+                <div className="text-center">
+                  <p className="text-sm font-medium text-gray-900">
+                    {selectedFiles && selectedFiles.length > 0 
+                      ? `${selectedFiles.length} images selected` 
+                      : 'Click to select multiple images'}
+                  </p>
+                  <p className="text-xs text-gray-500 mt-1">Select all images for this album</p>
+                </div>
+              </div>
             </div>
-            <div className="flex gap-2 justify-end">
+          </div>
+          <div className="flex gap-2 justify-end">
               <Button
                 variant="outline"
                 onClick={() => setIsAddAlbumOpen(false)}
@@ -866,7 +887,6 @@ export default function AdminDashboard() {
                 )}
               </Button>
             </div>
-          </div>
         </DialogContent>
       </Dialog>
       {/* View Album Images Dialog */}
