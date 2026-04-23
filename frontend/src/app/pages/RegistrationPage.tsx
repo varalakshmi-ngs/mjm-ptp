@@ -132,8 +132,22 @@ export default function RegistrationPage() {
               {[
                 
                 "SDVVL SKILL HUB",
+                "SDVVL SURVEY & CONSTRUCTION PVT LTD",
                 "NUHVIN GLOBAL SERVICES PVT LTD",
                 "PINKMOON TECHNOLOGIES",
+                "Byte Skills Technology pvt ltd",
+                "Mirav Technologies",
+                "Cognito Insights Solutions Pvt Ltd",
+                "SRAM SOLUTIONS",
+                "Ashvee Tech Solutions Pvt Ltd",
+                "Makers Mind Soft Solutions Pvt Ltd",
+                "FLYEX CARGO",
+                "Tam Tam Robotics school",
+                "PhonePe",
+                "Kia Motors",
+                "Micromax",
+                "Skyfri Energy Pvt Ltd",
+                "Renewsys Pvt Ltd",
                 "Aurobindo Pharmaceuticals",
                 "Apitoria Pharma",
                 "Honour Lab Limited",
@@ -145,7 +159,8 @@ export default function RegistrationPage() {
                 "RESOLUTE SKYQUAD ELECTRONICS",
                 "Voith Turbo Pvt Ltd",
                 "Neuland Laboratories Ltd",
-                "Lyfius Pharma Kakinada"
+                "Mahendra Mithaiwala Pvt LTD",
+                "DBS Bank",
               ].map((company, index) => (
                 <span key={index} className="inline-block">
                   {company}

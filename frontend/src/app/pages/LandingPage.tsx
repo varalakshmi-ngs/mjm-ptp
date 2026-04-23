@@ -214,14 +214,14 @@ export default function LandingPage() {
                 qualification: "Any Degree",
                 address: "Addanki"
               },
-              {
-                name: "Geonify Solutions Pvt Ltd",
-                logo: "/logos/geonify.png",
-                salary: "15,000/- to 20,000/-",
-                designation: "React Native Developer,AI/ML Engineer,Python Developer",
-                qualification: "B.TECH, M.TECH,MBA",
-                address: "Vijayawada"
-              },
+              // {
+              //   name: "Geonify Solutions Pvt Ltd",
+              //   logo: "/logos/geonify.png",
+              //   salary: "15,000/- to 20,000/-",
+              //   designation: "React Native Developer,AI/ML Engineer,Python Developer",
+              //   qualification: "B.TECH, M.TECH,MBA",
+              //   address: "Vijayawada"
+              // },
               {
                 name: "Cognito Insights Solutions Pvt Ltd",
                 logo: "/logos/cognito.png",
@@ -255,134 +255,134 @@ export default function LandingPage() {
                 qualification: "Any Degree",
                 address: "Kakinada"
               },
-              {
-                name: "Airtel Black",
-                logo: "/logos/airtel-black.jpg",
-                salary: "16,000/-",
-                designation: "Voice Process",
-                qualification: "Any Degree",
-                address: "Hyderabad"
-              },
-              {
-                name: "Airtel Wifi",
-                logo: "/logos/airtel-wifi.jpg",
-                salary: "14,000/- to 17,500/-",
-                designation: "Voice Process",
-                qualification: "Any Degree",
-                address: "Hyderabad"
-              },
-              {
-                name: "Axis Bank",
-                logo: "/logos/axis-bank.png",
-                salary: "15,000/- to 20,000/-",
-                designation: "Customer Support Executive",
-                qualification: "Intermediate, Any Degree",
-                address: "Hyderabad"
-              },
-              {
-                name: "Varun Motors",
-                logo: "/logos/varun-motors.jpg",
-                salary: "14,000/- to 28,000/- + Incentives",
-                designation: "Executive- Sales",
-                qualification: "Any Degree",
-                address: "Kakinada,Yeleswaram,Annavaram,Rajahmundry"
-              },
-              {
-                name: "Deccan Fine Chemicals India Pvt Ltd",
-                logo: "/logos/deccan.jpg",
-                salary: "18000/-",
-                designation: "Trainee Chemist",
-                qualification: "BSc Chemistry / Diploma in Chemical",
-                address: "Tuni"
-              },
-              {
-                name: "BOB Cards",
-                logo: "/logos/bob-card.jpg",
-                salary: "18000/- to 22,000/- + Incentives",
-                designation: "Customer Relationship Executive",
-                qualification: "Any Graduation",
-                address: "Kakinada & East Godavari"
-              },
-              {
-                name: "SBI Payments",
-                logo: "/logos/sbi-payments.png",
-                salary: "11000/- to 19,500/- + Incentives",
-                designation: "Sales Assistants,Senior Sales Assistants,Team Leaders",
-                qualification: "Inter & Above",
-                address: "Kakinada & East Godavari"
-              },
-              {
-                name: "Appollo Pharmacy",
-                logo: "/logos/apollo.jpg",
-                salary: "11,500/- to 22,000/-",
-                designation: "Pharmacist,Retail Associate",
-                qualification: "B.Pharm, D.Pharm",
-                address: "Multiple Locations"
-              },
-              {
-                name: "Sri Gopal Automotive ltd",
-                logo: "/logos/sree-gopal.jpg",
-                salary: "12000/- to 14,000/-",
-                designation: "Sales Executive,Branch Incharge",
-                qualification: "Inter / Any Degree / Diploma",
-                address: "Multiple Locations"
-              },
-              {
-                name: "IFB Industries",
-                logo: "/logos/ifb.png",
-                salary: "15000/- + Incentives",
-                designation: "Service Technicians",
-                qualification: "SSC to Any Degree",
-                address: "Multiple Locations In AP "
-              },
-              {
-                name: "Muthoot Finance Ltd",
-                logo: "/logos/muthoot.png",
-                salary: "10,000/- to 20,000/-",
-                designation: "Internship",
-                qualification: "Any Degree",
-                address: "Kakinada"
-              },
-              {
-                name: "LG Authorised Service Center",
-                logo: "/logos/lg.jpg",
-                salary: "15,000/- + Incentives",
-                designation: "Field Engineer, Customer Care Officer",
-                qualification: "ITI/Diploma/Any Degree",
-                address: "Anakapalli"
-              },
-              {
-                name: "DD Solar Solutions",
-                logo: "/logos/dd-solar.png",
-                salary: "15,000/- + Incentives",
-                designation: "Field Technicians",
-                qualification: "ITI / Diploma",
-                address: "Anakapalli"
-              },
-              {
-                name: "Team Lease",
-                logo: "/logos/team-lease.webp",
-                salary: "15000/- to 16,000/-",
-                designation: "Branch Relationship Executive",
-                qualification: "Inter / Any Degree",
-                address: "kakinada, Rajahmundry, Tuni"
-              },
-              {
-                name: "Tata Electronics",
-                logo: "/logos/tata-electronics.png",
-                salary: "19128/- CTC per month",
-                designation: "Mobile Operator",
-                qualification: "10th/12th/Any Degree",
-                address: "Bangalore"
-              },
-              {
-                name: "Tech Mahindra",
-                logo: "/logos/tech-mahindra.png",
-                salary: "17000/-",
-                designation: "Customer Support Associate (Voice Process)",
-                qualification: "Graduation & Above",
-                address: "Visakhapatnam"
-              },
+              // {
+              //   name: "Airtel Black",
+              //   logo: "/logos/airtel-black.jpg",
+              //   salary: "16,000/-",
+              //   designation: "Voice Process",
+              //   qualification: "Any Degree",
+              //   address: "Hyderabad"
+              // },
+              // {
+              //   name: "Airtel Wifi",
+              //   logo: "/logos/airtel-wifi.jpg",
+              //   salary: "14,000/- to 17,500/-",
+              //   designation: "Voice Process",
+              //   qualification: "Any Degree",
+              //   address: "Hyderabad"
+              // },
+              // {
+              //   name: "Axis Bank",
+              //   logo: "/logos/axis-bank.png",
+              //   salary: "15,000/- to 20,000/-",
+              //   designation: "Customer Support Executive",
+              //   qualification: "Intermediate, Any Degree",
+              //   address: "Hyderabad"
+              // },
+              // {
+              //   name: "Varun Motors",
+              //   logo: "/logos/varun-motors.jpg",
+              //   salary: "14,000/- to 28,000/- + Incentives",
+              //   designation: "Executive- Sales",
+              //   qualification: "Any Degree",
+              //   address: "Kakinada,Yeleswaram,Annavaram,Rajahmundry"
+              // },
+              // {
+              //   name: "Deccan Fine Chemicals India Pvt Ltd",
+              //   logo: "/logos/deccan.jpg",
+              //   salary: "18000/-",
+              //   designation: "Trainee Chemist",
+              //   qualification: "BSc Chemistry / Diploma in Chemical",
+              //   address: "Tuni"
+              // },
+              // {
+              //   name: "BOB Cards",
+              //   logo: "/logos/bob-card.jpg",
+              //   salary: "18000/- to 22,000/- + Incentives",
+              //   designation: "Customer Relationship Executive",
+              //   qualification: "Any Graduation",
+              //   address: "Kakinada & East Godavari"
+              // },
+              // {
+              //   name: "SBI Payments",
+              //   logo: "/logos/sbi-payments.png",
+              //   salary: "11000/- to 19,500/- + Incentives",
+              //   designation: "Sales Assistants,Senior Sales Assistants,Team Leaders",
+              //   qualification: "Inter & Above",
+              //   address: "Kakinada & East Godavari"
+              // },
+              // {
+              //   name: "Appollo Pharmacy",
+              //   logo: "/logos/apollo.jpg",
+              //   salary: "11,500/- to 22,000/-",
+              //   designation: "Pharmacist,Retail Associate",
+              //   qualification: "B.Pharm, D.Pharm",
+              //   address: "Multiple Locations"
+              // },
+              // {
+              //   name: "Sri Gopal Automotive ltd",
+              //   logo: "/logos/sree-gopal.jpg",
+              //   salary: "12000/- to 14,000/-",
+              //   designation: "Sales Executive,Branch Incharge",
+              //   qualification: "Inter / Any Degree / Diploma",
+              //   address: "Multiple Locations"
+              // },
+              // {
+              //   name: "IFB Industries",
+              //   logo: "/logos/ifb.png",
+              //   salary: "15000/- + Incentives",
+              //   designation: "Service Technicians",
+              //   qualification: "SSC to Any Degree",
+              //   address: "Multiple Locations In AP "
+              // },
+              // {
+              //   name: "Muthoot Finance Ltd",
+              //   logo: "/logos/muthoot.png",
+              //   salary: "10,000/- to 20,000/-",
+              //   designation: "Internship",
+              //   qualification: "Any Degree",
+              //   address: "Kakinada"
+              // },
+              // {
+              //   name: "LG Authorised Service Center",
+              //   logo: "/logos/lg.jpg",
+              //   salary: "15,000/- + Incentives",
+              //   designation: "Field Engineer, Customer Care Officer",
+              //   qualification: "ITI/Diploma/Any Degree",
+              //   address: "Anakapalli"
+              // },
+              // {
+              //   name: "DD Solar Solutions",
+              //   logo: "/logos/dd-solar.png",
+              //   salary: "15,000/- + Incentives",
+              //   designation: "Field Technicians",
+              //   qualification: "ITI / Diploma",
+              //   address: "Anakapalli"
+              // },
+              // {
+              //   name: "Team Lease",
+              //   logo: "/logos/team-lease.webp",
+              //   salary: "15000/- to 16,000/-",
+              //   designation: "Branch Relationship Executive",
+              //   qualification: "Inter / Any Degree",
+              //   address: "kakinada, Rajahmundry, Tuni"
+              // },
+              // {
+              //   name: "Tata Electronics",
+              //   logo: "/logos/tata-electronics.png",
+              //   salary: "19128/- CTC per month",
+              //   designation: "Mobile Operator",
+              //   qualification: "10th/12th/Any Degree",
+              //   address: "Bangalore"
+              // },
+              // {
+              //   name: "Tech Mahindra",
+              //   logo: "/logos/tech-mahindra.png",
+              //   salary: "17000/-",
+              //   designation: "Customer Support Associate (Voice Process)",
+              //   qualification: "Graduation & Above",
+              //   address: "Visakhapatnam"
+              // },
               
 
               {
