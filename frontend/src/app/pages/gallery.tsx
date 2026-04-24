@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { MapPin, Phone, Mail, Grid3x3, Loader, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { MapPin, Phone, Mail, Grid3x3, Loader, ChevronLeft, ChevronRight, X, Menu } from 'lucide-react';
 
 interface Album {
   id: number;
@@ -23,6 +23,7 @@ export default function GalleryPage() {
   const [albumImages, setAlbumImages] = useState<AlbumImage[]>([]);
   const [imagesLoading, setImagesLoading] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     fetchGalleryImages();
@@ -116,7 +117,43 @@ export default function GalleryPage() {
                 Register
               </button>
             </nav>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden flex items-center">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="text-gray-700 p-2"
+              >
+                {isMenuOpen ? <X className="h-8 w-8" /> : <Menu className="h-8 w-8" />}
+              </button>
+            </div>
           </div>
+
+          {/* Mobile Navigation */}
+          {isMenuOpen && (
+            <div className="md:hidden bg-white border-t border-gray-100 py-4 space-y-4">
+              <button
+                onClick={() => {
+                  navigate('/');
+                  setIsMenuOpen(false);
+                }}
+                className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 font-medium"
+              >
+                Home
+              </button>
+              <div className="px-4 pt-2">
+                <button
+                  onClick={() => {
+                    navigate('/register');
+                    setIsMenuOpen(false);
+                  }}
+                  className="w-full text-gray-700 hover:bg-amber-300 font-bold bg-amber-200 h-10 rounded-xl"
+                >
+                  Register
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </header>
 

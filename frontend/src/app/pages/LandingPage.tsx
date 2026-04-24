@@ -1,11 +1,13 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Hero } from '../components/Hero';
 import { WelcomePopup } from '../components/WelcomePopup';
-import { Building2, Users, Briefcase, TrendingUp, MapPin, Phone, Mail } from 'lucide-react';
+import { Building2, Users, Briefcase, TrendingUp, MapPin, Phone, Mail, Menu, X } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 
 export default function LandingPage() {
   const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleRegisterClick = () => {
     navigate('/register');
@@ -42,11 +44,79 @@ export default function LandingPage() {
               </button>
             </nav>
 
+            {/* Mobile Menu Button */}
+            <div className="md:hidden flex items-center">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="text-gray-700 p-2"
+              >
+                {isMenuOpen ? <X className="h-8 w-8" /> : <Menu className="h-8 w-8" />}
+              </button>
+            </div>
           </div>
 
+          {/* Mobile Navigation */}
+          {isMenuOpen && (
+            <div className="md:hidden bg-white border-t border-gray-100 py-4 space-y-4">
+              <button
+                onClick={() => {
+                  document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
+                  setIsMenuOpen(false);
+                }}
+                className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 font-medium"
+              >
+                Home
+              </button>
+              <button
+                onClick={() => {
+                  document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+                  setIsMenuOpen(false);
+                }}
+                className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 font-medium"
+              >
+                About
+              </button>
+              <button
+                onClick={() => {
+                  document.getElementById('companies')?.scrollIntoView({ behavior: 'smooth' });
+                  setIsMenuOpen(false);
+                }}
+                className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 font-medium"
+              >
+                Companies
+              </button>
+              <button
+                onClick={() => {
+                  document.getElementById('event-details')?.scrollIntoView({ behavior: 'smooth' });
+                  setIsMenuOpen(false);
+                }}
+                className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 font-medium"
+              >
+                Event Details
+              </button>
+              <button
+                onClick={() => {
+                  navigate('/gallery');
+                  setIsMenuOpen(false);
+                }}
+                className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 font-medium"
+              >
+                Gallery
+              </button>
+              <div className="px-4 pt-2">
+                <button
+                  onClick={() => {
+                    navigate('/register');
+                    setIsMenuOpen(false);
+                  }}
+                  className="w-full text-gray-700 hover:bg-amber-300 font-bold bg-amber-200 h-10 rounded-xl"
+                >
+                  Register
+                </button>
+              </div>
+            </div>
+          )}
         </div>
-
-
       </header>
 
       {/* Hero Section */}
