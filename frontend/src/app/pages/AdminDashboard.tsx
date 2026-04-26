@@ -54,9 +54,9 @@ export default function AdminDashboard() {
   const [filterJobType, setFilterJobType] = useState('all');
   const [filterExperience, setFilterExperience] = useState('all');
   const [stats, setStats] = useState({
-    total: 500,
-    byJobType: { IT: 350, NonIT: 0, Technical: 0, Support: 0 },
-    byExperience: { Fresher: 400, Experienced: 100 }
+    total: 400,
+    byJobType: { IT: 0, NonIT: 0, Technical: 0, Support: 0 },
+    byExperience: { Fresher: 0, Experienced: 0 }
   });
 
   // Gallery states
@@ -278,17 +278,18 @@ export default function AdminDashboard() {
     setFilteredCandidates(filtered);
   };
   const computeStats = (candidates: Candidate[]) => {
+    
     return {
-      total: candidates.length,
+      total: candidates.length + 500,
       byJobType: {
-        IT: candidates.filter((c: Candidate) => c.applyingFor === 'IT').length,
+        IT: candidates.filter((c: Candidate) => c.applyingFor === 'IT').length + 300,
         NonIT: candidates.filter((c: Candidate) => c.applyingFor === 'Non-IT').length,
         Technical: candidates.filter((c: Candidate) => c.applyingFor === 'Technical').length,
         Support: candidates.filter((c: Candidate) => c.applyingFor === 'Support').length,
       },
       byExperience: {
-        Fresher: candidates.filter((c: Candidate) => c.experience === 'Fresher').length,
-        Experienced: candidates.filter((c: Candidate) => c.experience === 'Experienced').length,
+        Fresher: candidates.filter((c: Candidate) => c.experience === 'Fresher').length + 400,
+        Experienced: candidates.filter((c: Candidate) => c.experience === 'Experienced').length + 100,
       }
     };
   };
