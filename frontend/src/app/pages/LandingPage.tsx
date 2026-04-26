@@ -594,6 +594,14 @@ export default function LandingPage() {
                 address: "HYDERABAD"
               },
               {
+                name:"LYFUS",
+                logo: "/logos/lyfus.png",
+                salary:"18,500/-",
+                designation:"Multiple roles in Pharma",
+                qualification:"LABS B.COM / BA",
+                address:"Kakinada"
+              },
+              {
                 name: "SKY QUARD ELECTRONICS",
                 logo: "/logos/resolute.png",
                 salary: "14,000/- TO 20,000/- + FOOD & TRANSPORT",

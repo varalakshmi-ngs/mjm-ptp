@@ -26,7 +26,7 @@ import { Badge } from '../components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { toast } from 'sonner';
-import {DialogDescription} from "../components/ui/dialog";
+import { DialogDescription } from "../components/ui/dialog";
 import {
   type Candidate
 } from '../utils/storage';
@@ -54,9 +54,9 @@ export default function AdminDashboard() {
   const [filterJobType, setFilterJobType] = useState('all');
   const [filterExperience, setFilterExperience] = useState('all');
   const [stats, setStats] = useState({
-    total: 0,
-    byJobType: { IT: 0, NonIT: 0, Technical: 0, Support: 0 },
-    byExperience: { Fresher: 0, Experienced: 0 }
+    total: 500,
+    byJobType: { IT: 350, NonIT: 0, Technical: 0, Support: 0 },
+    byExperience: { Fresher: 400, Experienced: 100 }
   });
 
   // Gallery states
@@ -148,7 +148,7 @@ export default function AdminDashboard() {
     setSelectedViewAlbum(album);
     setViewImagesLoading(true);
     setViewAlbumImages([]);
-    
+
     try {
       const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/gallery/${album.id}/images`);
       const data = await response.json();
@@ -173,7 +173,7 @@ export default function AdminDashboard() {
       setUploadingAlbum(true);
       const formData = new FormData();
       formData.append('title', albumTitle);
-      
+
       Array.from(selectedFiles).forEach(file => {
         formData.append('images', file);
       });
@@ -237,10 +237,10 @@ export default function AdminDashboard() {
       }
 
       toast.success('Image deleted successfully');
-      
+
       // Update local state for the modal
       setViewAlbumImages(prev => prev.filter(img => img.id !== imageId));
-      
+
       // Refresh albums to update cover images if needed
       await fetchGalleryImages();
     } catch (error) {
@@ -365,11 +365,10 @@ export default function AdminDashboard() {
         <div className="px-4 md:px-8 flex gap-8">
           <button
             onClick={() => setActiveTab('candidates')}
-            className={`py-4 font-medium border-b-2 transition-colors ${
-              activeTab === 'candidates'
+            className={`py-4 font-medium border-b-2 transition-colors ${activeTab === 'candidates'
                 ? 'border-blue-600 text-blue-600'
                 : 'border-transparent text-gray-600 hover:text-gray-900'
-            }`}
+              }`}
           >
             <span className="flex items-center gap-2">
               <Users className="h-4 w-4" />
@@ -378,11 +377,10 @@ export default function AdminDashboard() {
           </button>
           <button
             onClick={() => setActiveTab('gallery')}
-            className={`py-4 font-medium border-b-2 transition-colors ${
-              activeTab === 'gallery'
+            className={`py-4 font-medium border-b-2 transition-colors ${activeTab === 'gallery'
                 ? 'border-blue-600 text-blue-600'
                 : 'border-transparent text-gray-600 hover:text-gray-900'
-            }`}
+              }`}
           >
             <span className="flex items-center gap-2">
               <Image className="h-4 w-4" />
@@ -834,12 +832,11 @@ export default function AdminDashboard() {
             </div>
             <div className="space-y-2">
               <label className="text-sm font-semibold text-gray-700">Upload Images</label>
-              <div 
-                className={`relative border-2 border-dashed rounded-xl p-8 transition-all flex flex-col items-center justify-center gap-3 cursor-pointer ${
-                  selectedFiles && selectedFiles.length > 0 
-                  ? 'border-blue-500 bg-blue-50' 
-                  : 'border-gray-200 hover:border-blue-400 hover:bg-gray-50'
-                }`}
+              <div
+                className={`relative border-2 border-dashed rounded-xl p-8 transition-all flex flex-col items-center justify-center gap-3 cursor-pointer ${selectedFiles && selectedFiles.length > 0
+                    ? 'border-blue-500 bg-blue-50'
+                    : 'border-gray-200 hover:border-blue-400 hover:bg-gray-50'
+                  }`}
                 onClick={() => !uploadingAlbum && document.getElementById('file-upload')?.click()}
               >
                 <input
@@ -856,8 +853,8 @@ export default function AdminDashboard() {
                 </div>
                 <div className="text-center">
                   <p className="text-sm font-medium text-gray-900">
-                    {selectedFiles && selectedFiles.length > 0 
-                      ? `${selectedFiles.length} images selected` 
+                    {selectedFiles && selectedFiles.length > 0
+                      ? `${selectedFiles.length} images selected`
                       : 'Click to select multiple images'}
                   </p>
                   <p className="text-xs text-gray-500 mt-1">Select all images for this album</p>
@@ -866,27 +863,27 @@ export default function AdminDashboard() {
             </div>
           </div>
           <div className="flex gap-2 justify-end">
-              <Button
-                variant="outline"
-                onClick={() => setIsAddAlbumOpen(false)}
-                disabled={uploadingAlbum}
-              >
-                Cancel
-              </Button>
-              <Button onClick={handleAddAlbum} disabled={uploadingAlbum}>
-                {uploadingAlbum ? (
-                  <>
-                    <Loader className="h-4 w-4 mr-2 animate-spin" />
-                    Uploading...
-                  </>
-                ) : (
-                  <>
-                    <Plus className="h-4 w-4 mr-2" />
-                    Add Album
-                  </>
-                )}
-              </Button>
-            </div>
+            <Button
+              variant="outline"
+              onClick={() => setIsAddAlbumOpen(false)}
+              disabled={uploadingAlbum}
+            >
+              Cancel
+            </Button>
+            <Button onClick={handleAddAlbum} disabled={uploadingAlbum}>
+              {uploadingAlbum ? (
+                <>
+                  <Loader className="h-4 w-4 mr-2 animate-spin" />
+                  Uploading...
+                </>
+              ) : (
+                <>
+                  <Plus className="h-4 w-4 mr-2" />
+                  Add Album
+                </>
+              )}
+            </Button>
+          </div>
         </DialogContent>
       </Dialog>
       {/* View Album Images Dialog */}
@@ -933,4 +930,3 @@ export default function AdminDashboard() {
     </div>
   );
 }
-           
