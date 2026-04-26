@@ -54,7 +54,7 @@ export default function AdminDashboard() {
   const [filterJobType, setFilterJobType] = useState('all');
   const [filterExperience, setFilterExperience] = useState('all');
   const [stats, setStats] = useState({
-    total: 400,
+    total: 0,
     byJobType: { IT: 0, NonIT: 0, Technical: 0, Support: 0 },
     byExperience: { Fresher: 0, Experienced: 0 }
   });
