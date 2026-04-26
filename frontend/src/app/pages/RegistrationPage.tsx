@@ -56,23 +56,24 @@ export default function RegistrationPage() {
               <div className="bg-blue-50 rounded-lg p-6 mb-8">
                 <h2 className="font-semibold text-gray-900 mb-3">What's Next?</h2>
                 <ul className="text-left space-y-2 text-gray-700">
-                  <li className="flex items-start gap-2">
+                  {/* <li className="flex items-start gap-2">
                     <span className="text-blue-600 font-bold">1.</span>
                     <span>You will receive a confirmation email shortly</span>
-                  </li>
+                  </li> */}
                   <li className="flex items-start gap-2">
-                    <span className="text-blue-600 font-bold">2.</span>
+                    <span className="text-blue-600 font-bold">1.</span>
                     <span>Bring your registration confirmation on event day</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-blue-600 font-bold">3.</span>
+                    <span className="text-blue-600 font-bold">2.</span>
                     <span>Carry multiple copies of your resume and documents</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-blue-600 font-bold">4.</span>
+                    <span className="text-blue-600 font-bold">3.</span>
                     <span>Arrive by 9:00 AM on <b>April 27, 2026</b></span>
                   </li>
                 </ul>
+                {/* <span className="font-bold">Dont pay any amount to anyone for this recruitment proceess</span> */}
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
