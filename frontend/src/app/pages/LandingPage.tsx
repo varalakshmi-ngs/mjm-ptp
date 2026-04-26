@@ -40,7 +40,7 @@ export default function LandingPage() {
                 onClick={() => navigate('/register')}
                 className="text-gray-700 hover:bg-amber-300 font-bold cursor-pointer bg-amber-200 h-10 w-40 rounded-xl pb-[2px]"
               >
-                Register
+                Register for Free
               </button>
             </nav>
 

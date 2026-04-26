@@ -72,8 +72,11 @@ export default function RegistrationPage() {
                     <span className="text-blue-600 font-bold">3.</span>
                     <span>Arrive by 9:00 AM on <b>April 27, 2026</b></span>
                   </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-600 font-bold">4.</span>
+                    <span>Dont Pay Any Amount to anyone for this recruitment process</span>
+                  </li>
                 </ul>
-                {/* <span className="font-bold">Dont pay any amount to anyone for this recruitment proceess</span> */}
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
