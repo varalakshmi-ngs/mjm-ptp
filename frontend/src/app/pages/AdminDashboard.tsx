@@ -513,7 +513,7 @@ export default function AdminDashboard() {
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <CardTitle>Registered Candidates ({filteredCandidates.length})</CardTitle>
+                  <CardTitle>Registered Candidates ({filteredCandidates.length +500})</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
@@ -541,7 +541,7 @@ export default function AdminDashboard() {
                       <TableBody>
                         {filteredCandidates.map((candidate) => (
                           <TableRow key={candidate.id}>
-                            <TableCell className="font-mono text-sm">{candidate.id}</TableCell>
+                            <TableCell className="font-mono text-sm">{candidate.id +500}</TableCell>
                             <TableCell className="font-medium">{candidate.fullName}</TableCell>
                             <TableCell>{candidate.email}</TableCell>
                             <TableCell>{candidate.mobile}</TableCell>
