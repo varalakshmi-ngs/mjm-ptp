@@ -751,7 +751,7 @@ export default function LandingPage() {
 
                   <div className="mt-8 bg-white rounded-lg p-4 border-2 border-blue-300">
                     <p className="text-sm font-semibold text-blue-900 mb-2">⏰ Event Timing</p>
-                    <p className="text-2xl font-bold text-blue-600"><b>April 27, 2026</b></p>
+                    <p className="text-2xl font-bold text-blue-600"><b>May 05, 2026</b></p>
                     <p className="text-gray-700">9:00 AM - 5:00 PM</p>
                   </div>
                 </div>

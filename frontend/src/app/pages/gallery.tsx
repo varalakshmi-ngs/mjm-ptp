@@ -326,8 +326,8 @@ export default function GalleryPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">Venue</h3>
-                    <p className="text-gray-700 font-medium">SDVVL SKILL HUB</p>
-                    <p className="text-gray-600">Kakinada, Andhra Pradesh 533005</p>
+                    <p className="text-gray-700 font-medium">GOVERNMENT DEGREE COLLEGE</p>
+                    <p className="text-gray-600">Maredubaka, Andhra Pradesh 533308</p>
                   </div>
                 </div>
               </div>
@@ -365,7 +365,7 @@ export default function GalleryPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">Event Date & Time</h3>
-                    <p className="text-gray-700 font-medium">April 27, 2026</p>
+                    <p className="text-gray-700 font-medium">May 05, 2026</p>
                     <p className="text-gray-600">9:00 AM - 5:00 PM</p>
                   </div>
                 </div>
