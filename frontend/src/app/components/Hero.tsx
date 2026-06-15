@@ -63,7 +63,7 @@ export function Hero({ onRegisterClick }: HeroProps) {
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg mb-1">Event Date</h3>
-                  <p className="text-blue-100"><b>May 05, 2026 </b> | 9:00 AM - 5:00 PM</p>
+                  <p className="text-blue-100"><b>June 17, 2026 </b> | 9:00 AM - 4:00 PM</p>
                 </div>
               </div>
             </div>
@@ -75,7 +75,7 @@ export function Hero({ onRegisterClick }: HeroProps) {
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg mb-1">Venue</h3>
-                  <p className="text-blue-100"><b>GOVERNMENT DEGREE COLLEGE</b> , Maredubaka, Andhra Pradesh 533308</p>
+                  <p className="text-blue-100"><b>BIET Autonomous College </b> , Pennada Agraharam, Andhra Pradesh 534244</p>
                 </div>
               </div>
             </div>
