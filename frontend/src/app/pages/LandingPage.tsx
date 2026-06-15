@@ -693,8 +693,8 @@ export default function LandingPage() {
                       </div>
                       <div>
                         <h4 className="font-semibold text-gray-900">Venue</h4>
-                        <p className="text-gray-700"><b>SDVVL SKILL HUB </b></p>
-                        <p className="text-gray-600">Kakinada Andhra Pradesh, 533005</p>
+                        <p className="text-gray-700"><b>BIET Autonomous College </b></p>
+                        <p className="text-gray-600">Pennada Agraharam, Andhra Pradesh 534244</p>
 
 
                       </div>
@@ -752,7 +752,7 @@ export default function LandingPage() {
                   <div className="mt-8 bg-white rounded-lg p-4 border-2 border-blue-300">
                     <p className="text-sm font-semibold text-blue-900 mb-2">⏰ Event Timing</p>
                     <p className="text-2xl font-bold text-blue-600"><b>June 17, 2026</b></p>
-                    <p className="text-gray-700">9:00 AM - 5:00 PM</p>
+                    <p className="text-gray-700">9:00 AM - 4:00 PM</p>
                   </div>
                 </div>
               </div>
