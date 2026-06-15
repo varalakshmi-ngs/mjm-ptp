@@ -46,7 +46,7 @@ export function WelcomePopup() {
 
           {/* Action Button */}
           <div className="p-6 text-center">
-            <a href="https://nuhvin.com/" target="_blank" rel="noopener noreferrer">
+            <a href="https://nadt.nuhvin.com/" target="_blank" rel="noopener noreferrer">
             <Button
               onClick={() => setIsOpen(false)}
               className="bg-amber-300 hover:bg-amber-400 text-gray-900 font-bold px-12 py-3 rounded-lg transition-colors cursor-pointer"
